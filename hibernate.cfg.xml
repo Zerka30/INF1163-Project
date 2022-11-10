@@ -1,0 +1,16 @@
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:sqlite:application.db</property>
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- Drop and re-create the database schema on startup -->
+        <property name="hbm2ddl.auto">update</property>
+        <!-- Lors de l'utilisation des annotations @ManyToOne et OneToMany, l'ordre a son
+        importance -->
+        <mapping class="main.java.modele.Person" />
+    </session-factory>
+</hibernate-configuration>
