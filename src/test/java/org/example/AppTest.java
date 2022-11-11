@@ -3,6 +3,8 @@ package org.example;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import model.Person;
+import service.PersonService;
 
 /**
  * Unit test for simple App.
@@ -34,5 +36,15 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
+    }
+
+    public void addPerson() {
+        var sessionFactory = MySessionFactory.createSessionFactory();
+        var personService = new PersonService(sessionFactory);
+        var person = new Person("VALADE", "Jeremy");
+
+        personService.addPerson(person);
+        var persons = personService.getPersons();
+        assertTrue(persons.contains(person));
     }
 }
