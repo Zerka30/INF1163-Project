@@ -3,8 +3,8 @@ package org.example;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import model.Person;
-import service.PersonService;
+import entity.Person;
+import model.PersonService;
 
 /**
  * Unit test for simple App.

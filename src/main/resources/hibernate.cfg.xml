@@ -14,6 +14,6 @@
         <property name="hbm2ddl.auto">update</property>
         <!-- Lors de l'utilisation des annotations @ManyToOne et OneToMany, l'ordre a son
         importance -->
-        <mapping class="model.Member" />
+        <mapping class="entity.Member" />
     </session-factory>
 </hibernate-configuration>
