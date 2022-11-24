@@ -1,5 +1,7 @@
 package entity;
 
+import model.MovieService;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,6 +24,10 @@ public class CopyMovie {
             orphanRemoval = true
     )
     private Set<RentMovie> movies;
+
+    @ManyToOne
+    @JoinColumn(name="movie_id", nullable=false)
+    private Movie movie;
 
     public CopyMovie() {}
 

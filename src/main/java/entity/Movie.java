@@ -11,10 +11,11 @@ public class Movie {
 
     private boolean news;
 
-   // @OneToMany
-   // private Set<CopyMovie> copyMovieSet;
-
     @ManyToMany(mappedBy = "movies")
     private Set<Category> categories;
     public Movie() {}
+
+    public String getTitle() {
+        return title;
+    }
 }

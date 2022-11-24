@@ -9,8 +9,7 @@ public class MemberService {
     private final SessionFactory sessionFactory;
 
     public MemberService(SessionFactory sessionFactory) {
-        Objects.requireNonNull(sessionFactory);
-        this.sessionFactory = sessionFactory;
+        this.sessionFactory = Objects.requireNonNull(sessionFactory);
     }
 
     public void addMember(Member member) {

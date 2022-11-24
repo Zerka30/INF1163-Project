@@ -13,7 +13,7 @@ public class Category {
     @JoinTable(
             name = "category_movie",
             joinColumns = { @JoinColumn(name = "movie_id") },
-            inverseJoinColumns = { @JoinColumn(name = "employe_id") }
+            inverseJoinColumns = { @JoinColumn(name = "category_id") }
     )
     Set<Movie> movies;
 }
