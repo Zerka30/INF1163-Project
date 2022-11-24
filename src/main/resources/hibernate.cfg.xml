@@ -15,5 +15,11 @@
         <!-- Lors de l'utilisation des annotations @ManyToOne et OneToMany, l'ordre a son
         importance -->
         <mapping class="entity.Member" />
+        <mapping class="entity.Category" />
+        <mapping class="entity.Movie" />
+        <mapping class="entity.Invoice" />
+        <mapping class="entity.CopyMovie" />
+        <mapping class="entity.RentMovie" />
+
     </session-factory>
 </hibernate-configuration>

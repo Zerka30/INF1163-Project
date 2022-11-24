@@ -1,8 +1,8 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Member {
@@ -12,6 +12,21 @@ public class Member {
     private int secretCode;
 
     private String creditCard;
+
+    @OneToMany(
+            mappedBy = "copyMovie",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<RentMovie> movies;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "member_invoice",
+            joinColumns = { @JoinColumn(name = "member_id") },
+            inverseJoinColumns = { @JoinColumn(name = "invoice_id") }
+    )
+    Set<Invoice> invoices;
 
     public Member() {}
 

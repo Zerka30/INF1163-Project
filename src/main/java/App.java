@@ -1,15 +1,16 @@
-import entity.Person;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import model.PersonService;
 
 public class App {
     public static void main(String[] args) {
         var sessionFactory = getSessionFactory();
-        var personService = new PersonService(sessionFactory);
-        var person = new Person("VALADE", "Jeremy");
+     /*   var personService = new PersonService(sessionFactory);
+        var person = new Person("VALADE 6", "Jeremy");
 
-        personService.addPerson(person);
+       // personService.addPerson(person);
+        var list = personService.getPersons();
+        list.forEach(System.out::println);
+        //System.out.println(person);*/
     }
 
     public static SessionFactory getSessionFactory() {
