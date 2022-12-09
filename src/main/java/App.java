@@ -7,7 +7,7 @@ public class App {
     public static void main(String[] args) {
         var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
-
+//kalhsjdbfn
         createFrame(searchMovie.getWindow());
      /*   var personService = new PersonService(sessionFactory);
         var person = new Person("VALADE 6", "Jeremy");
