@@ -32,8 +32,10 @@ public class MovieService {
     public void createMovie(String title, Boolean isNew)
     {
         var session = sessionFactory.openSession();
+        var transaction = session.beginTransaction();
         Movie movie = new Movie(title,isNew);
         session.save(movie);
+        transaction.commit();
         session.close();
     }
     public void modifyMovie(Movie movie)
