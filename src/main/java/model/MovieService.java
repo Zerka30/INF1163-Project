@@ -39,7 +39,9 @@ public class MovieService {
     public void modifyMovie(Movie movie)
     {
         var session = sessionFactory.openSession();
+        var transaction = session.beginTransaction();
         session.update(movie);
+        transaction.commit();
         session.close();
     }
 }
