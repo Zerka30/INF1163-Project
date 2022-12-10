@@ -14,6 +14,7 @@ public class App {
         MovieService ms = new MovieService(sessionFactory);
         //Movie matrix = new Movie("matrix",true);
         ms.createMovie("matrix",true);
+        System.out.println("done");
 
     }
 
