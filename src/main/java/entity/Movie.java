@@ -14,7 +14,11 @@ public class Movie {
     @ManyToMany(mappedBy = "movies")
     private Set<Category> categories;
     public Movie() {}
-
+    public Movie(String title, Boolean isNew)
+    {
+        this.title = title;
+        this.news = isNew;
+    }
     public String getTitle() {
         return title;
     }

@@ -1,3 +1,5 @@
+import entity.Movie;
+import model.MovieService;
 import view.SearchMovieToModify;
 
 import javax.swing.*;
@@ -7,15 +9,12 @@ public class App {
     public static void main(String[] args) {
         var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
-//kalhsjdbfn
         createFrame(searchMovie.getWindow());
-     /*   var personService = new PersonService(sessionFactory);
-        var person = new Person("VALADE 6", "Jeremy");
 
-       // personService.addPerson(person);
-        var list = personService.getPersons();
-        list.forEach(System.out::println);
-        //System.out.println(person);*/
+        MovieService ms = new MovieService(sessionFactory);
+        //Movie matrix = new Movie("matrix",true);
+        ms.createMovie("matrix",true);
+
     }
 
     public static void createFrame(Component e) {

@@ -18,6 +18,7 @@ public class MovieService {
      * @param title : title of the movie
      * @return
      */
+
     public List<Movie> getMovies(String title) {
         var session = sessionFactory.openSession();
         List<Movie> movies;
@@ -27,5 +28,18 @@ public class MovieService {
             movies = session.createQuery("from Movie where title like '%" + title + "%'").list();
         session.close();
         return movies;
+    }
+    public void createMovie(String title, Boolean isNew)
+    {
+        var session = sessionFactory.openSession();
+        Movie movie = new Movie(title,isNew);
+        session.save(movie);
+        session.close();
+    }
+    public void modifyMovie(Movie movie)
+    {
+        var session = sessionFactory.openSession();
+        session.update(movie);
+        session.close();
     }
 }
