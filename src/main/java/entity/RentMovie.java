@@ -21,4 +21,21 @@ public class RentMovie {
     private Calendar rentBackDate;
     private Calendar rentBackUser;
     private int price;
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "RentMovie{" +
+                "rentMovieId=" + rentMovieId +
+                ", copyMovie=" + copyMovie +
+                ", member=" + member +
+                ", rentDate=" + rentDate +
+                ", rentBackDate=" + rentBackDate +
+                ", rentBackUser=" + rentBackUser +
+                ", price=" + price +
+                '}';
+    }
 }

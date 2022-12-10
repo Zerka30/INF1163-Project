@@ -20,4 +20,12 @@ public class MemberService {
         transaction.commit();
         session.close();
     }
+
+
 }
+
+
+
+// creer la requete " rendre un film "
+
+

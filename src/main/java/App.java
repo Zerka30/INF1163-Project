@@ -1,3 +1,6 @@
+import entity.Member;
+import model.MemberService;
+import model.MovieService;
 import view.SearchMovieToModify;
 
 import javax.swing.*;
@@ -8,7 +11,23 @@ public class App {
         var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
 
+
+
+        //var memberajout=new Member("0681300200","michouville ",65 , "inoxtag");
+
+        HibernateUtils.getSessionFactory();
+
+        var memberservicebis=new MemberService(sessionFactory);
+        var removemoviebis=new MovieService(sessionFactory);
+        //memberservicebis.addMember(memberajout);
+
+
+        var toto=removemoviebis.getrentMovies(1,"345");
+        toto.setPrice(90);
+        System.out.println("ca passe");
+        removemoviebis.updaterentMovie(toto);
         createFrame(searchMovie.getWindow());
+
      /*   var personService = new PersonService(sessionFactory);
         var person = new Person("VALADE 6", "Jeremy");
 
@@ -31,5 +50,6 @@ public class App {
 
 
 }
-/*
-Commentaire à la con */
+
+
+

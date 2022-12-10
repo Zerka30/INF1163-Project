@@ -1,8 +1,10 @@
 package model;
 
+import entity.Member;
 import entity.Movie;
+import entity.RentMovie;
 import org.hibernate.SessionFactory;
-
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,4 +30,36 @@ public class MovieService {
         session.close();
         return movies;
     }
+
+
+
+    public RentMovie getrentMovies(int copymovie_id ,String member_phonenumber ) {
+        var session = sessionFactory.openSession();
+        RentMovie delmovies;
+        if (member_phonenumber== null || member_phonenumber.isEmpty())
+            delmovies = (RentMovie) session.createQuery("from RentMovie").list().get(0);
+            //delmovies = (RentMovie) session.createQuery("from RentMovie where copymovie_id="+copymovie_id+"and member_phonenumber="+member_phonenumber).getSingleResult();
+        else {
+            System.out.println("oui");
+            delmovies = (RentMovie) session.createQuery("from RentMovie").list().get(0);
+            //delmovies = (RentMovie) session.createQuery("from RentMovie where copymovie_id="+copymovie_id+"and member_phonenumber="+member_phonenumber).getSingleResult();}
+            System.out.println("delmovies " + delmovies);
+        }
+        session.close();
+        return delmovies;
+    }
+
+
+
+    public void updaterentMovie(RentMovie delmovie) {
+        Objects.requireNonNull(delmovie);
+        var session = sessionFactory.openSession();
+        var transaction = session.beginTransaction();
+        session.update(delmovie);
+        System.out.println("delmovies " + delmovie);
+        transaction.commit();
+        session.close();
+    }
+
+
 }
