@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "member")
 public class Member {
     @Id
     private String phoneNumber;
