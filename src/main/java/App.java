@@ -1,6 +1,8 @@
 import entity.Member;
 import model.MemberService;
 import model.MovieService;
+import view.RetourFilmbis;
+import view.Retourfilm;
 import view.SearchMovieToModify;
 
 import javax.swing.*;
@@ -20,13 +22,33 @@ public class App {
         var memberservicebis=new MemberService(sessionFactory);
         var removemoviebis=new MovieService(sessionFactory);
         //memberservicebis.addMember(memberajout);
+        var affichage=new RetourFilmbis("oui");
+        //JFrame Frame =new RetourFilmbis("oui");
+        affichage.setVisible(true);
 
 
+
+
+
+
+/*
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                var Frame=new Retourfilm(sessionFactory);
+                Frame.affichagerent("version test ");
+
+            }
+        });
+*/
         var toto=removemoviebis.getrentMovies(1,"345");
-        toto.setPrice(90);
+        System.out.println("ici"+affichage.valeurprix);
+        toto.setPrice(affichage.valeurprix);
         System.out.println("ca passe");
         removemoviebis.updaterentMovie(toto);
-        createFrame(searchMovie.getWindow());
+        //createFrame(searchMovie.getWindow());
+
+
 
      /*   var personService = new PersonService(sessionFactory);
         var person = new Person("VALADE 6", "Jeremy");
