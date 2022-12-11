@@ -1,8 +1,12 @@
 package view;
 
+import model.MovieService;
+import org.hibernate.SessionFactory;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class RetourFilmbis extends JFrame {
     private JPanel Retourfilmpanel;
@@ -10,12 +14,15 @@ public class RetourFilmbis extends JFrame {
     private JLabel Labeltest;
     private JButton buttontest;
     private JLabel labeltest2;
+    private final MovieService movieService;
 
     public int valeurprix;
 
-    public  RetourFilmbis(String title) {
-
+    public  RetourFilmbis(String title, SessionFactory sessionFactory) {
         super(title);
+        this.movieService = new MovieService(Objects.requireNonNull(sessionFactory));
+
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(Retourfilmpanel);
         this.pack();
@@ -31,12 +38,19 @@ public class RetourFilmbis extends JFrame {
                 System.out.println(valeurprix);
 
                 labeltest2.setText("La valeur est changé par "+textrecup);
+                var toto=movieService.getrentMovies(1,"345");
+                toto.setPrice(valeurprix);
+                System.out.println("ca passe");
+                System.out.println("ici"+valeurprix);
+                movieService.updaterentMovie(toto);
 
 
 
 
             }
+
         });
+
     }
 
 

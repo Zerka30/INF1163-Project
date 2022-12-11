@@ -25,6 +25,7 @@ public class SearchMovieToModify {
     private JButton search;
 
     public SearchMovieToModify(SessionFactory sessionFactory) {
+        //window.updateUI();
         this.movieService = new MovieService(Objects.requireNonNull(sessionFactory));
         var columns = new String[]{"title", "modifier"};
         movies = movieService.getMovies(null);

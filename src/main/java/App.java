@@ -22,7 +22,7 @@ public class App {
         var memberservicebis=new MemberService(sessionFactory);
         var removemoviebis=new MovieService(sessionFactory);
         //memberservicebis.addMember(memberajout);
-        var affichage=new RetourFilmbis("oui");
+        var affichage=new RetourFilmbis("oui",sessionFactory);
         //JFrame Frame =new RetourFilmbis("oui");
         affichage.setVisible(true);
 
@@ -41,11 +41,6 @@ public class App {
             }
         });
 */
-        var toto=removemoviebis.getrentMovies(1,"345");
-        System.out.println("ici"+affichage.valeurprix);
-        toto.setPrice(affichage.valeurprix);
-        System.out.println("ca passe");
-        removemoviebis.updaterentMovie(toto);
         //createFrame(searchMovie.getWindow());
 
 
