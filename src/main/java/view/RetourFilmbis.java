@@ -11,9 +11,10 @@ import java.util.Objects;
 public class RetourFilmbis extends JFrame {
     private JPanel Retourfilmpanel;
     private JTextField texttest;
-    private JLabel Labeltest;
     private JButton buttontest;
     private JLabel labeltest2;
+    private JTextField textField2;
+    private JTextField textField3;
     private final MovieService movieService;
 
     public int valeurprix;
@@ -32,13 +33,16 @@ public class RetourFilmbis extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //grab the text
                 int textrecup=(int)Double.parseDouble(texttest.getText());
+                String textrecup2=textField2.getText();
 
-                valeurprix=textrecup;
+                int textrecup3=(int)Double.parseDouble(textField3.getText());
+                valeurprix=textrecup3;
 
                 System.out.println(valeurprix);
 
-                labeltest2.setText("La valeur est changé par "+textrecup);
-                var toto=movieService.getrentMovies(1,"345");
+                labeltest2.setText("La valeur est changé par "+textrecup3);
+                var toto=movieService.getrentMovies(textrecup,textrecup2);
+                toto.setrentbackdate();
                 toto.setPrice(valeurprix);
                 System.out.println("ca passe");
                 System.out.println("ici"+valeurprix);

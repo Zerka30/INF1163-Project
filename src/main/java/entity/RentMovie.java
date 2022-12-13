@@ -25,6 +25,9 @@ public class RentMovie {
     public void setPrice(int price) {
         this.price = price;
     }
+    public void setrentbackdate() {
+        this.rentBackDate = Calendar.getInstance();
+    }
 
     @Override
     public String toString() {
