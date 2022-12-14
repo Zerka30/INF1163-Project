@@ -29,6 +29,7 @@ public class MovieService {
         session.close();
         return movies;
     }
+
     public void createMovie(Movie movie)
     {
         var session = sessionFactory.openSession();
@@ -37,16 +38,24 @@ public class MovieService {
         transaction.commit();
         session.close();
     }
-    public void modifyMovie(Movie movie, Boolean isNewUpdate)
+    public void modifyMovie(Movie movieToUpdate)
     {
         var session = sessionFactory.openSession();
         var transaction = session.beginTransaction();
         //session.update(movie);
-        session.delete(movie);
-        Movie updateMovie = new Movie(movie.getTitle(), isNewUpdate);
-        session.save(updateMovie);
 
-        transaction.commit();
+        List<Movie> movieList = getMovies(movieToUpdate.getTitle());
+        for (Movie movie : movieList) {
+            if (movie.getTitle().equals(movieToUpdate.getTitle())) {
+                session.delete(movie);
+                transaction.commit();
+                session.save(movieToUpdate);
+                transaction.commit();
+            }
+            else {
+                session.close();
+            }
+        }
         session.close();
     }
 }

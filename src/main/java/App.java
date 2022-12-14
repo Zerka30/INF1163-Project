@@ -1,5 +1,6 @@
 import entity.Movie;
 import model.MovieService;
+import view.CreateMovie;
 import view.SearchMovieToModify;
 
 import javax.swing.*;
@@ -8,16 +9,16 @@ import java.awt.*;
 public class App {
     public static void main(String[] args) {
         var sessionFactory = HibernateUtils.getSessionFactory();
-        var searchMovie = new SearchMovieToModify(sessionFactory);
-        createFrame(searchMovie.getWindow());
-
         MovieService ms = new MovieService(sessionFactory);
-        Movie matrix = new Movie("matrix",true);
-        ms.createMovie(matrix);
-        System.out.println("movie Created");
-        ms.modifyMovie(matrix,false);
-        System.out.println("Movie updated");
+        CreateMovie createMovie = new CreateMovie(ms,sessionFactory);
+        createFrame(createMovie.getWindow());
 
+        Movie movietest = new Movie("ManualTry",1,"DVD","Action",true);
+        ms.createMovie(movietest);
+
+/*
+        ms.modifyMovie(matrix,false);
+        System.out.println("Movie updated");*/
 
     }
 
