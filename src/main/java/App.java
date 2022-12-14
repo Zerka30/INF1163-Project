@@ -12,9 +12,12 @@ public class App {
         createFrame(searchMovie.getWindow());
 
         MovieService ms = new MovieService(sessionFactory);
-        //Movie matrix = new Movie("matrix",true);
-        ms.createMovie("matrix",true);
-        System.out.println("done");
+        Movie matrix = new Movie("matrix",true);
+        ms.createMovie(matrix);
+        System.out.println("movie Created");
+        ms.modifyMovie(matrix,false);
+        System.out.println("Movie updated");
+
 
     }
 

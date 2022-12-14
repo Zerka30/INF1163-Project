@@ -29,20 +29,23 @@ public class MovieService {
         session.close();
         return movies;
     }
-    public void createMovie(String title, Boolean isNew)
+    public void createMovie(Movie movie)
     {
         var session = sessionFactory.openSession();
         var transaction = session.beginTransaction();
-        Movie movie = new Movie(title,isNew);
         session.save(movie);
         transaction.commit();
         session.close();
     }
-    public void modifyMovie(Movie movie)
+    public void modifyMovie(Movie movie, Boolean isNewUpdate)
     {
         var session = sessionFactory.openSession();
         var transaction = session.beginTransaction();
-        session.update(movie);
+        //session.update(movie);
+        session.delete(movie);
+        Movie updateMovie = new Movie(movie.getTitle(), isNewUpdate);
+        session.save(updateMovie);
+
         transaction.commit();
         session.close();
     }
