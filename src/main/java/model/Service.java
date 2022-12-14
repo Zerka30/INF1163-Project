@@ -1,11 +1,14 @@
 package model;
 
+import entity.CopyMovie;
+import entity.Movie;
 import entity.MyTable;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.Entity;
+import javax.print.attribute.standard.Copies;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +39,7 @@ public class Service {
         closeSession();
     }
 
-    public void update(MyTable entity) {
+    public void update(Object entity) {
         openSession();
         session.update(entity);
         closeSession();
@@ -55,5 +58,13 @@ public class Service {
         session.save(object);
         transaction.commit();
         session.close();
+    }
+
+    public List<CopyMovie> getCopiesIdOfMovie(Movie movie) {
+        var session = sessionFactory.openSession();
+        List<CopyMovie> copyMovie;
+        copyMovie = session.createQuery("from CopyMovie where movie_id = '"  + movie.getTitle() + "'").list();
+        session.close();
+        return copyMovie;
     }
 }

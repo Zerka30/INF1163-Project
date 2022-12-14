@@ -9,6 +9,8 @@ import java.util.Set;
 @Entity
 @Table(name = "copyMovie")
 public class CopyMovie {
+
+
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private int id;
@@ -40,6 +42,18 @@ public class CopyMovie {
         this.support =  Objects.requireNonNull(support);
         this.movie = Objects.requireNonNull(movie);
 
+    }
+
+    public String getSupport() {
+        return support;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
 }

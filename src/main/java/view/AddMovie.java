@@ -49,10 +49,7 @@ public class AddMovie {
         categoriesList2.revalidate();
         categoriesList.revalidate();
 
-
-
-
-        var grid2 = new GridLayout(3, 2);
+        var grid2 = new GridLayout(3, 3);
         supportInformation.setLayout(grid2);
         var supportLabel = new JLabel("Support");
         var quantityLabel = new JLabel("Quantité");

@@ -35,6 +35,14 @@ public class Movie {
         return title;
     }
 
+    public boolean isNews() {
+        return news;
+    }
+
+    public void setNews(boolean news) {
+        this.news = news;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
