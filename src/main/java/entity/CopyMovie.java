@@ -3,13 +3,14 @@ package entity;
 import model.MovieService;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "copyMovie")
 public class CopyMovie {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private int id;
     // numbers of copies
     private int quantity;
@@ -31,7 +32,13 @@ public class CopyMovie {
 
     public CopyMovie() {}
 
-    public CopyMovie(int quantity, int price, String support) {
+    public CopyMovie(int quantity, int price, String support, Movie movie) {
+        if (quantity < 0 || price < 0)
+            throw new IllegalArgumentException();
+        this.quantity = quantity;
+        this.price = price;
+        this.support =  Objects.requireNonNull(support);
+        this.movie = Objects.requireNonNull(movie);
 
     }
 

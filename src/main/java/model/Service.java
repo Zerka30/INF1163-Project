@@ -48,4 +48,12 @@ public class Service {
         closeSession();
         return  list;
     }
+
+    public void save(Object object) {
+        session = sessionFactory.openSession();
+        transaction = session.beginTransaction();
+        session.save(object);
+        transaction.commit();
+        session.close();
+    }
 }

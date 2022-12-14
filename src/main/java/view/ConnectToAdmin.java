@@ -1,8 +1,8 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,29 +16,25 @@ public class ConnectToAdmin extends JDialog {
     private JTextField passwordField;
 
     private final String passwordAdmin;
+    private boolean authentication;
 
     public ConnectToAdmin() {
         passwordAdmin = initPasswordAdmin();
-
-
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
+        buttonCancel.addActionListener(e -> onCancel());
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        // call onCancel() when cross is clicked
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
                 onCancel();
             }
         });
-
         // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
@@ -51,6 +47,15 @@ public class ConnectToAdmin extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        features();
+    }
+
+    private void features() {
+        setResizable(false);
+        setSize(new Dimension(400, 100));
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private String initPasswordAdmin() {
@@ -64,15 +69,17 @@ public class ConnectToAdmin extends JDialog {
             throw new RuntimeException(e);
         }
 
-
-
         return properties.getProperty("password");
+    }
+
+    public boolean isAuthentication() {
+        return authentication;
     }
 
     private void onOK() {
         if (passwordAdmin.equals(passwordField.getText())) {
             dispose();
-            //otherframe
+            authentication = true;
         }
         else {
             var message = "<html>Mauvais mot de passe <br />" + labelPassword.getText();

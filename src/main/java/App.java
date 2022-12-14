@@ -2,6 +2,7 @@ import controller.HibernateUtils;
 import entity.Member;
 import model.MemberService;
 import model.Service;
+import view.Home;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -12,6 +13,9 @@ import java.util.Objects;
 
 public class App {
     public static void main(String[] args) {
+        //var app = new Home("Videotron", 500, 500);
+
+
       /*  var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
       //  System.out.println("hello " + searchMovie.getWindow());
