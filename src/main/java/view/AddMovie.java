@@ -100,10 +100,11 @@ public class AddMovie {
                 var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Integer.parseInt(blueRayPrice.getText()), blueRayLabel.getText(), movie);
                 var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Integer.parseInt(dvdPrice.getText()), dvdLabel.getText(), movie);
 
+                System.out.println(movie);
+
                 service.save(movie);
                 service.save(copyMovie);
                 service.save(copyMovie2);
-                System.out.println(categories);
             }
         });
     }

@@ -11,13 +11,7 @@ public class Category {
     @Id
     private String name;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST,
-            CascadeType.MERGE })
-    @JoinTable(
-            name = "category_movie",
-            joinColumns = { @JoinColumn(name = "category_id") },
-            inverseJoinColumns = { @JoinColumn(name = "movie_id") }
-    )
+    @ManyToMany(mappedBy = "categories")
     Set<Movie> movies;
 
     public Category() {}
@@ -28,5 +22,13 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "name='" + name + '\'' +
+                ", movies=" + movies +
+                '}';
     }
 }
