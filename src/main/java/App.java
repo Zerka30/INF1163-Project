@@ -2,24 +2,26 @@ import controller.HibernateUtils;
 import entity.Member;
 import model.MemberService;
 import model.Service;
-import view.SearchMovieToModify;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class App {
     public static void main(String[] args) {
-        var sessionFactory = HibernateUtils.getSessionFactory();
+      /*  var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
       //  System.out.println("hello " + searchMovie.getWindow());
-      //  createFrame(searchMovie.getPanel());
+        createFrame(searchMovie.getPanel());
         //Entity toto = new Member();
         var member = new Member("888888","55" , 55, "545" );
         var service = new Service(sessionFactory);
-        service.add(member);
+        //service.add(member);
+        //Class<? extends Entity> e;
+
        /* Object s = new String();
         System.out.println();
         Arrays.stream(s.getClass().getDeclaredAnnotations()).forEach(System.out::println);
@@ -39,6 +41,7 @@ public class App {
 
     public static void createFrame(java.util.List<Component> e) {
         var home = new JFrame("videotron");
+        System.out.println(e);
         home.getContentPane().add(e.get(0));
         //home.getContentPane().add(e.get(1));
         home.setPreferredSize(new Dimension(500, 500));

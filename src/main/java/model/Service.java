@@ -1,15 +1,19 @@
 package model;
 
+import entity.MyTable;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.Entity;
+import java.util.List;
 import java.util.Objects;
 
 public class Service {
     private final SessionFactory sessionFactory;
     private Session session;
     private Transaction transaction;
+
     public Service(SessionFactory sessionFactory) {
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
     }
@@ -26,15 +30,22 @@ public class Service {
         session.close();
     }
 
-    public void add(Object entity) {
+    public void add(MyTable entity) {
         openSession();
         session.save(entity);
         closeSession();
     }
 
-    public void update(Object entity) {
+    public void update(MyTable entity) {
         openSession();
         session.update(entity);
         closeSession();
+    }
+
+    public List<? extends Entity> request(String query) {
+        openSession();
+        var list = session.createQuery(query).list();
+        closeSession();
+        return  list;
     }
 }
