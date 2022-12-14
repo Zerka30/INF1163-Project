@@ -47,11 +47,11 @@ public class CreateMovie {
     }
 
     //ATTRIBUTS
-    String title;
-    String support;
-    String category;
-    Boolean isNew;
-    int quantity;
+    private String title;
+    private String support;
+    private String category;
+    private Boolean isNew;
+    private int quantity;
     private JButton createMovieButton;
     private JCheckBox isNewCheckBox;
     private JComboBox categoryComboBox;

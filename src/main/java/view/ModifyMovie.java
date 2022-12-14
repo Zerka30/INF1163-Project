@@ -46,9 +46,9 @@ public class ModifyMovie {
         }
     }
     //ATTRIBUTS
-    String newSupport;
-    Boolean newIsNew;
-    int newQuantity;
+    private String newSupport;
+    private Boolean newIsNew;
+    private int newQuantity;
     private JComboBox supportComboBox;
     private JCheckBox isNewCheckBox;
     private JTextField quantityTextField;

@@ -7,16 +7,17 @@ import java.util.Set;
 @Table(name = "movie")
 public class Movie {
     @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    private int quantity;
     private String title;
-    String support;
-    String category;
-    int quantity;
+    private String support;
+    private String category;
     private boolean isNew;
 
     @ManyToMany(mappedBy = "movies")
     private Set<Category> categories;
     public Movie() {}
-    public Movie(String name, int quantity, String support, String category, Boolean isNew)
+    public Movie(String title, int quantity, String support, String category, Boolean isNew)
     {
         this.title = title;
         this.quantity = quantity;
