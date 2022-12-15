@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "member")
-public final class Member implements MyTable {
+public final class Member {
     @Id
     private String phoneNumber;
     private String address;

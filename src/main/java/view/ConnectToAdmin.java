@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 
 public class ConnectToAdmin extends JDialog {
@@ -42,11 +43,7 @@ public class ConnectToAdmin extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         features();
     }
@@ -61,7 +58,7 @@ public class ConnectToAdmin extends JDialog {
     private String initPasswordAdmin() {
         var properties = new Properties();
         try {
-            var input = new FileInputStream(getClass().getClassLoader().getResource("program.cfg").getFile());
+            var input = new FileInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("program.cfg")).getFile());
             properties.load(input);
         } catch (FileNotFoundException e) {
             return "1234";

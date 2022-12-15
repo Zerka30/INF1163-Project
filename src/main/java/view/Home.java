@@ -1,7 +1,5 @@
 package view;
 
-import model.MovieService;
-import model.Service;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
@@ -34,8 +32,8 @@ public class Home extends JFrame {
 
    private void initPages() {
         addMovie = new AddMovie(sessionFactory);
-        rentMovie = new RentMovie(new Service(sessionFactory));
-        searchModifyMovie = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
+        rentMovie = new RentMovie(sessionFactory);
+        searchModifyMovie = new SearchModifyMovie(sessionFactory);
         informationMovie = new InformationMovie(sessionFactory);
     }
     private void specificationOfFrame(String title, int width, int height) {
@@ -99,12 +97,11 @@ public class Home extends JFrame {
             changePanel(addMovie.getPanelWindow());
         });
 
-
         rentMovieMenu.addActionListener(new MenuAction(rentMovie.getPanelWindow()));
         modifyMovieMenu.addActionListener(new MenuAction(searchModifyMovie.getPanelWindow()));
 
         modifyMovieMenu.addActionListener(actionEvent -> {
-            searchModifyMovie = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
+            searchModifyMovie = new SearchModifyMovie(sessionFactory);
             changePanel(searchModifyMovie.getPanelWindow());
         });
     }

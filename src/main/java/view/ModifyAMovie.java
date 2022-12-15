@@ -2,11 +2,10 @@ package view;
 
 import entity.Movie;
 import model.Service;
+import org.hibernate.SessionFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,11 +17,12 @@ public class ModifyAMovie extends JFrame {
     private JCheckBox news;
     private JLabel titleLabel;
 
-    private Service service;
-    private Movie movie;
+    private final Service service;
+    private final Movie movie;
 
-    public ModifyAMovie(Service service, Movie movie) {
-        this.service = Objects.requireNonNull(service);
+    public ModifyAMovie(SessionFactory sessionFactory, Movie movie) {
+        Objects.requireNonNull(sessionFactory);
+        this.service = new Service(sessionFactory);
         this.movie = Objects.requireNonNull(movie);
         features();
         initTabForSupport();
@@ -31,7 +31,6 @@ public class ModifyAMovie extends JFrame {
         news.revalidate();
         getContentPane().add(window, BorderLayout.CENTER);
         window.revalidate();
-
     }
 
     private void features() {
@@ -64,22 +63,14 @@ public class ModifyAMovie extends JFrame {
         formMovieInclude.revalidate();
         formMovie.revalidate();
 
-        modifyMovie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                movie.setNews(news.isSelected());
-                service.update(movie);
-                for (var i = 0; i < copiesMovie.size(); i++) {
-                    copiesMovie.get(i).setQuantity(Integer.parseInt(field.get(i).getText()));
-                    service.update(copiesMovie.get(i));
-                    dispose();
-                }
+        modifyMovie.addActionListener(actionEvent -> {
+            movie.setNews(news.isSelected());
+            service.update(movie);
+            for (var i = 0; i < copiesMovie.size(); i++) {
+                copiesMovie.get(i).setQuantity(Integer.parseInt(field.get(i).getText()));
+                service.update(copiesMovie.get(i));
+                dispose();
             }
         });
     }
-
-    public JPanel getPanelWindow() {
-        return window;
-    }
-
 }

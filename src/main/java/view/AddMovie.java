@@ -9,10 +9,9 @@ import org.hibernate.SessionFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 public class AddMovie {
@@ -25,15 +24,36 @@ public class AddMovie {
     private JPanel categoriesList2;
     private JPanel support;
     private JPanel supportInformation;
-    private final MovieService movieService;
-    private Service service;
-    public AddMovie(SessionFactory sessionFactory) {
-        this.movieService = Objects.requireNonNull(new MovieService(sessionFactory));
-        this.service = Objects.requireNonNull(new Service(sessionFactory));
-        var categories = movieService.getCategories();
+    private JTextField blueRayQuantity;
 
+    private JLabel blueRayLabel;
+    private JLabel dvdLabel;
+
+    private JTextField blueRayPrice;
+    private JTextField dvdQuantity;
+    private JTextField dvdPrice;
+
+
+    private List<JCheckBox> categoriesCheckBox;
+    private final MovieService movieService;
+    private final Service service;
+
+    public AddMovie(SessionFactory sessionFactory) {
+        Objects.requireNonNull(sessionFactory);
+        this.movieService = new MovieService(sessionFactory);
+        this.service = new Service(sessionFactory);
+
+        drawCategories();
+        drawSupport();
+        addMovie();
+        formAddMovie.revalidate();
+
+    }
+
+    private void drawCategories() {
+        var categories = movieService.getCategories();
         var grid = new GridLayout(categories.size(), 1);
-        var categoriesCheckBox = new ArrayList<JCheckBox>();
+        categoriesCheckBox = new ArrayList<>();
         categoriesList2.setLayout(grid);
         for (var category : categories) {
             var checkBox = new JCheckBox(category.getName());
@@ -45,19 +65,22 @@ public class AddMovie {
         categoriesList2.revalidate();
         categoriesList.revalidate();
 
+    }
+
+    private void drawSupport() {
         var grid2 = new GridLayout(3, 3);
         supportInformation.setLayout(grid2);
         var supportLabel = new JLabel("Support");
         var quantityLabel = new JLabel("Quantité");
         var priceLabel = new JLabel("Price");
 
-        var blueRayLabel = new JLabel("blueray");
-        var blueRayQuantity = new JTextField("0");
-        var blueRayPrice = new JTextField("0");
+        blueRayLabel = new JLabel("blueray");
+        blueRayQuantity = new JTextField("0");
+        blueRayPrice = new JTextField("0");
 
-        var dvdLabel = new JLabel("Dvd");
-        var dvdQuantity = new JTextField("0");
-        var dvdPrice = new JTextField("0");
+        dvdLabel = new JLabel("Dvd");
+        dvdQuantity = new JTextField("0");
+        dvdPrice = new JTextField("0");
 
         // Columns
         supportInformation.add(supportLabel);
@@ -77,34 +100,27 @@ public class AddMovie {
         support.add(jsp2);
         supportInformation.revalidate();
         support.revalidate();
+    }
 
-        formAddMovie.revalidate();
-
-        buttonAddMovie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                var categories = new HashSet<Category>();
-                for (var checkbox : categoriesCheckBox) {
-                    if (checkbox.isSelected()) {
-                        categories.add(new Category(checkbox.getText()));
-                    }
+    private void addMovie() {
+        buttonAddMovie.addActionListener(actionEvent -> {
+            var categories = new HashSet<Category>();
+            for (var checkbox : categoriesCheckBox) {
+                if (checkbox.isSelected()) {
+                    categories.add(new Category(checkbox.getText()));
                 }
-                var movie = new Movie(titleField.getText(), news.isSelected(), categories);
-                var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Integer.parseInt(blueRayPrice.getText()), blueRayLabel.getText(), movie);
-                var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Integer.parseInt(dvdPrice.getText()), dvdLabel.getText(), movie);
-
-                service.save(movie);
-                service.save(copyMovie);
-                service.save(copyMovie2);
             }
+            var movie = new Movie(titleField.getText(), news.isSelected(), categories);
+            var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Integer.parseInt(blueRayPrice.getText()), blueRayLabel.getText(), movie);
+            var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Integer.parseInt(dvdPrice.getText()), dvdLabel.getText(), movie);
+
+            service.save(movie);
+            service.save(copyMovie);
+            service.save(copyMovie2);
         });
     }
 
-    private void drawCategories() {
-
-    }
-
-   public JPanel getPanelWindow() {
+    public JPanel getPanelWindow() {
         return formAddMovie;
-   }
+    }
 }

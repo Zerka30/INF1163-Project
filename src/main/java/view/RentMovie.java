@@ -5,10 +5,8 @@ import entity.Member;
 import entity.Movie;
 import entity.RentMovieKey;
 import model.Service;
-
+import org.hibernate.SessionFactory;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -28,14 +26,19 @@ public class RentMovie {
     private final Service service;
     private Member member;
     private Movie movie;
-    private CopyMovie copyMovie;
-    private JComboBox movieJComboBox;
-    private JComboBox supportJComboBox;
-    private JComboBox locationJComboBox;
+    private JComboBox<Object> movieJComboBox;
+    private JComboBox<Object> supportJComboBox;
+    private JComboBox<Object> locationJComboBox;
 
-    public RentMovie(Service service) {
-        this.service = Objects.requireNonNull(service);
+    public RentMovie(SessionFactory sessionFactory) {
+        Objects.requireNonNull(sessionFactory);
+        this.service = new Service(sessionFactory);
 
+        drawWindow();
+        addRentMovie();
+    }
+
+    private void drawWindow() {
         searchMember.addActionListener(actionEvent -> {
             member = service.getMember(memberId.getText());
             memberLabel.setText("<html>Identifiant : " + member.getPhoneNumber() + "<br/>Code secret : " + member.getSecretCode());
@@ -43,48 +46,42 @@ public class RentMovie {
         searchMovie.addActionListener(actionEvent -> {
             getMovie.removeAll();
             var movies = service.getMovies(movieId.getText());
-            var moviesTitle = movies.stream().map(x -> x.getTitle()).toArray();
+            var moviesTitle = movies.stream().map(Movie::getTitle).toArray();
 
-            movieJComboBox = new JComboBox(moviesTitle);
+            movieJComboBox = new JComboBox<>(moviesTitle);
 
-            movieJComboBox.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    supportPanel.removeAll();
-                    panelRent.removeAll();
-                    movie = service.getMovie(movieJComboBox.getSelectedItem().toString());
-                    var supports = service.getCopiesIdOfMovie(movie);
+            movieJComboBox.addActionListener(actionEvent1 -> {
+                supportPanel.removeAll();
+                panelRent.removeAll();
+                movie = service.getMovie(Objects.requireNonNull(movieJComboBox.getSelectedItem()).toString());
+                var supports = service.getCopiesIdOfMovie(movie);
 
-                    supportJComboBox = new JComboBox<>(supports.stream().map(x -> x.getSupport()).toArray());
-                    supportPanel.add(supportJComboBox);
-                    supportPanel.revalidate();
+                supportJComboBox = new JComboBox<>(supports.stream().map(CopyMovie::getSupport).toArray());
+                supportPanel.add(supportJComboBox);
+                supportPanel.revalidate();
 
-
-                    String[] typeOfLocation;
-                    if (movie.isNews()) {
-                        typeOfLocation = new String[]{"Journée"};
-                    } else {
-                        typeOfLocation = new String[]{"Journée", "Semaine"};
-                    }
-                    locationJComboBox = new JComboBox<>(typeOfLocation);
-                    panelRent.add(locationJComboBox);
-                    panelRent.revalidate();
+                String[] typeOfLocation;
+                if (movie.isNews()) {
+                    typeOfLocation = new String[]{"Journée"};
+                } else {
+                    typeOfLocation = new String[]{"Journée", "Semaine"};
                 }
+                locationJComboBox = new JComboBox<>(typeOfLocation);
+                panelRent.add(locationJComboBox);
+                panelRent.revalidate();
             });
             getMovie.add(movieJComboBox);
             getMovie.revalidate();
         });
-
-        addRentMovie();
     }
 
     private void addRentMovie() {
         buttonRentMovie.addActionListener(actionEvent -> {
-            var copyMovie = service.getCopyMovie(movieJComboBox.getSelectedItem().toString(), supportJComboBox.getSelectedItem().toString());
+            var copyMovie = service.getCopyMovie(Objects.requireNonNull(movieJComboBox.getSelectedItem()).toString(), Objects.requireNonNull(supportJComboBox.getSelectedItem()).toString());
             System.out.println("CopyMOvie id " + copyMovie.getId());
             var today = Calendar.getInstance();
             var rentDate = Calendar.getInstance();
-            if (locationJComboBox.getSelectedItem().toString().equals("Journée")) {
+            if (Objects.requireNonNull(locationJComboBox.getSelectedItem()).toString().equals("Journée")) {
                 rentDate.add(Calendar.DAY_OF_MONTH, 1);
             } else {
                 rentDate.add(Calendar.DAY_OF_MONTH, 7);
@@ -99,7 +96,6 @@ public class RentMovie {
     public JPanel getPanelWindow() {
         return rentMoviePanel;
     }
-
 
 
 }
