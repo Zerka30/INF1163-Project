@@ -1,6 +1,7 @@
 package model;
 
 import entity.CopyMovie;
+import entity.Member;
 import entity.Movie;
 import entity.MyTable;
 import org.hibernate.Session;
@@ -62,9 +63,40 @@ public class Service {
 
     public List<CopyMovie> getCopiesIdOfMovie(Movie movie) {
         var session = sessionFactory.openSession();
-        List<CopyMovie> copyMovie;
-        copyMovie = session.createQuery("from CopyMovie where movie_id = '"  + movie.getTitle() + "'").list();
+        List<CopyMovie> copyMovie = session.createQuery("from CopyMovie where movie_id = '"  + movie.getTitle() + "'").list();
+        session.close();
+        return copyMovie;
+    }
+
+    public Member getMember(String phoneNumber) {
+        var session = sessionFactory.openSession();
+        var m = (Member) session.createQuery("from Member where phonenumber = '" + phoneNumber + "'").getSingleResult();
+        session.close();
+        return m;
+    }
+    public List<Movie> getMovies(String title) {
+        var session = sessionFactory.openSession();
+        List<Movie> movies;
+        if (title == null || title.isEmpty())
+            movies = session.createQuery("from Movie").list();
+        else
+            movies = session.createQuery("from Movie where title like '%" + title + "%'").list();
+        session.close();
+        return movies;
+    }
+
+    public Movie getMovie(String title) {
+        var session = sessionFactory.openSession();
+        var m = (Movie) session.createQuery("from Movie where title= '" + title + "'").getSingleResult();
+        session.close();
+        return m;
+    }
+
+    public CopyMovie getCopyMovie(String title, String support) {
+        var session = sessionFactory.openSession();
+        var copyMovie = (CopyMovie) session.createQuery("from CopyMovie where movie_id = '" + title + "' and support = '" + support + "'").getSingleResult();
         session.close();
         return copyMovie;
     }
 }
+

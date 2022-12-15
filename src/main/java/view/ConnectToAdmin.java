@@ -53,7 +53,7 @@ public class ConnectToAdmin extends JDialog {
 
     private void features() {
         setResizable(false);
-        setSize(new Dimension(400, 100));
+        setSize(new Dimension(500, 500));
         setLocationRelativeTo(null);
         setVisible(true);
     }

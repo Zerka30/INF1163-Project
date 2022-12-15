@@ -106,22 +106,7 @@ public class AddMovie {
         });
     }
 
-    public static void main(String[] args) {
-        createFrame();
-    }
-
-    public static void createFrame() {
-        var home = new JFrame("videotron");
-        var session = HibernateUtils.getSessionFactory();
-        var movieService = new MovieService(session);
-        var addMovie = new AddMovie(movieService, new Service(session));
-        home.getContentPane().add(addMovie.formAddMovie);
-        //home.getContentPane().add(e.get(1));
-        home.setPreferredSize(new Dimension(500, 500));
-        home.setLocationRelativeTo(null);
-        home.pack();
-        home.setLocationRelativeTo(null);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        home.setVisible(true);
-    }
+   public JPanel getPanelWindow() {
+        return formAddMovie;
+   }
 }

@@ -1,8 +1,6 @@
 package view;
 
-import controller.HibernateUtils;
 import entity.Movie;
-import model.MovieService;
 import model.Service;
 
 import javax.swing.*;
@@ -10,11 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Objects;
 
-public class ModifyAMovie {
-    private JPanel panel1;
+public class ModifyAMovie extends JFrame {
+    private JPanel window;
     private JPanel formMovie;
     private JPanel formMovieInclude;
     private JButton modifyMovie;
@@ -23,13 +20,25 @@ public class ModifyAMovie {
 
     private Service service;
     private Movie movie;
+
     public ModifyAMovie(Service service, Movie movie) {
         this.service = Objects.requireNonNull(service);
         this.movie = Objects.requireNonNull(movie);
+        features();
         initTabForSupport();
         titleLabel.setText(movie.getTitle());
         news.setSelected(movie.isNews());
         news.revalidate();
+        getContentPane().add(window, BorderLayout.CENTER);
+        window.revalidate();
+
+    }
+
+    private void features() {
+        setResizable(false);
+        setSize(new Dimension(500, 500));
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     private void initTabForSupport() {
@@ -63,27 +72,14 @@ public class ModifyAMovie {
                 for (var i = 0; i < copiesMovie.size(); i++) {
                     copiesMovie.get(i).setQuantity(Integer.parseInt(field.get(i).getText()));
                     service.update(copiesMovie.get(i));
+                    dispose();
                 }
             }
         });
     }
 
-    public static void main(String[] args) {
-        createFrame();
+    public JPanel getPanelWindow() {
+        return window;
     }
 
-    public static void createFrame() {
-        var home = new JFrame("videotron");
-        var session = HibernateUtils.getSessionFactory();
-        var movieService = new MovieService(session);
-        var addMovie = new ModifyAMovie(new Service(session), new Movie("8888888888", true, new HashSet<>()));
-        home.getContentPane().add(addMovie.panel1);
-        //home.getContentPane().add(e.get(1));
-        home.setPreferredSize(new Dimension(500, 500));
-        home.setLocationRelativeTo(null);
-        home.pack();
-        home.setLocationRelativeTo(null);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        home.setVisible(true);
-    }
 }

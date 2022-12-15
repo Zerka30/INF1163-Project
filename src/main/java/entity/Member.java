@@ -37,4 +37,12 @@ public final class Member implements MyTable {
         this.secretCode = Objects.requireNonNull(secretCode);
         this.creditCard = Objects.requireNonNull(creditCard);
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getSecretCode() {
+        return secretCode;
+    }
 }

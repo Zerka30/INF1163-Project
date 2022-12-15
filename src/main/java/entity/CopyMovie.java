@@ -9,8 +9,6 @@ import java.util.Set;
 @Entity
 @Table(name = "copyMovie")
 public class CopyMovie {
-
-
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private int id;
@@ -56,4 +54,7 @@ public class CopyMovie {
         this.quantity = quantity;
     }
 
+    public int getId() {
+        return id;
+    }
 }

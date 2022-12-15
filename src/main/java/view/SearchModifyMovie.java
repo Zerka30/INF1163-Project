@@ -2,6 +2,7 @@ package view;
 
 import controller.HibernateUtils;
 import model.MovieService;
+import model.Service;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
@@ -11,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class SearchModifyMovie {
-    static JFrame home;
     private JPanel all;
     private JPanel search;
     private JPanel result;
@@ -46,9 +46,14 @@ public class SearchModifyMovie {
             buttonModifyMovie.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                   // home.dispose();
-                    home.removeAll();
-                    test(sessionFactory);
+                    var panel1 = new JPanel();
+                    panel1.setBackground(Color.BLUE);
+                    var modifyMovie = new ModifyAMovie(new Service(sessionFactory), movie);
+                    panel1.removeAll();
+                    panel1 = modifyMovie.getPanelWindow();
+                    panel1.revalidate();
+
+                  //  test(sessionFactory);
                 }
             });
             result2.add(titleLabel);
@@ -59,50 +64,8 @@ public class SearchModifyMovie {
         result2.revalidate();
         result.revalidate();
     }
-    public static void main(String[] args) {
-        var session = HibernateUtils.getSessionFactory();
-        var test = new SearchModifyMovie(new MovieService(session), session);
 
-        var menuBar = new JMenuBar();
-        menuBar.setLayout(new GridLayout(0,1));
-        var menu = new JMenu("Ajouter un film");
-        menu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
-
-
-        var menuModifier = new JMenu("Modifier un film");
-        menuBar.add(menu);
-        menuBar.add(menuModifier);
-
-        home = new JFrame("videotron");
-        home.setJMenuBar(menuBar);
-        home.setLayout(new GridLayout(1,2));
-        home.getContentPane().add(test.all,  BorderLayout.EAST);
-        home.setPreferredSize(new Dimension(500, 200));
-        home.setLocationRelativeTo(null);
-        home.setResizable(false);
-        home.pack();
-        home.setLocationRelativeTo(null);
-        home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        home.setVisible(true);
-    }
-
-    public static void test(SessionFactory sessionFactory) {
-        var test = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
-        //home = new JFrame("videotron 2");
-        home.getContentPane().add(test.all);
-        home.revalidate();
-        home.repaint();
-        //home.setPreferredSize(new Dimension(750, 1000));
-        //home.setLocationRelativeTo(null);
-        //home.setResizable(false);
-        //home.pack();
-        //home.setLocationRelativeTo(null);
-        //home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //home.setVisible(true);
+    public JPanel getPanelWindow() {
+        return all;
     }
 }

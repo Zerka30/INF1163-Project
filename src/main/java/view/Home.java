@@ -1,108 +1,100 @@
 package view;
 
 import model.MovieService;
+import model.Service;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class Home {
-    private JFrame app;
-    private boolean isAdmin;
+public class Home extends JFrame {
 
-    private SessionFactory sessionFactory;
-    public Home(String titleApp, int width, int height, SessionFactory sessionFactory) {
+    private final SessionFactory sessionFactory;
+    private AddMovie addMovie;
+    private RentMovie rentMovie;
+    private SearchModifyMovie searchModifyMovie;
+
+    public Home(String title, int width, int height, SessionFactory sessionFactory) {
+        Objects.requireNonNull(title);
         if (width < 0 || height < 0)
-            throw new IllegalArgumentException("Width or height not inferior to zero");
-
+            throw new IllegalArgumentException();
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
 
-        isAdmin = false;
-        app = new JFrame(titleApp);
-        createFrame(width, height);
-
-
-
+        initPages();
+        initMenu();
+        specificationOfFrame(title, width, height);
     }
 
-    private void createFrame(int width, int height) {
-        app.setJMenuBar(createJMenuBar());
-        app.setPreferredSize(new Dimension(width, height));
-        app.setLocationRelativeTo(null);
-        app.setResizable(false);
-        app.pack();
-        app.setLocationRelativeTo(null);
-        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setVisible(true);
+    private void initPages() {
+        addMovie = new AddMovie(new MovieService(sessionFactory), new Service(sessionFactory));
+        rentMovie = new RentMovie(new Service(sessionFactory));
+        searchModifyMovie = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
+    }
+    private void specificationOfFrame(String title, int width, int height) {
+        setTitle(title);
+        setPreferredSize(new Dimension(width, height));
+        setResizable(false);
+        pack();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        setLayout(new BorderLayout());
     }
 
-    private JMenuBar createJMenuBar() {
-        var menuBar = new JMenuBar();
-        menuBar.setLayout(new GridLayout(0, 1));
-        // list items of menu
-        var app = new JMenu("Accueil");
-        var addMovie = new JMenu("Ajouter un film");
-        var modifyMovie = new JMenu("Modifier un film");
-        var informationAboutMovies = new JMenu("Informations sur les films");
-        var backMovie = new JMenu("Rendre un film");
-        var createMember = new JMenu("Créer un membre");
-        var administration = new JMenu("Administration");
-        var jmenuItemn = new JMenuItem("tesy");
+    private class MenuAction implements ActionListener {
 
-        //jmenuItemn.
-        administration.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent menuEvent) {
-                var admin = new ConnectToAdmin();
-            }
+        private JPanel panel;
 
-            @Override
-            public void menuDeselected(MenuEvent menuEvent) {
-
-            }
-
-            @Override
-            public void menuCanceled(MenuEvent menuEvent) {
-
-            }
-        });
-
-        modifyMovie.addMenuListener(new MenuListener() {
-            @Override
-            public void menuSelected(MenuEvent menuEvent) {
-                var searchModiy = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
-            }
-
-            @Override
-            public void menuDeselected(MenuEvent menuEvent) {
-
-            }
-
-            @Override
-            public void menuCanceled(MenuEvent menuEvent) {
-
-            }
-        });
-
-
-        var disconnect = new JMenu("Déconnexion");
-
-        menuBar.add(app);
-        menuBar.add(informationAboutMovies);
-        menuBar.add(backMovie);
-        menuBar.add(createMember);
-
-        if (!isAdmin)
-            menuBar.add(administration);
-        if (isAdmin) {
-            menuBar.add(addMovie);
-            menuBar.add(modifyMovie);
-            menuBar.add(disconnect);
+        private MenuAction(JPanel panel) {
+            this.panel = panel;
         }
 
-        return menuBar;
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            changePanel(panel);
+        }
+    }
+
+    private void initMenu() {
+        var menubar = new JMenuBar();
+        var menu = new JMenu("Menu");
+        var homePage = new JMenuItem("Accueil");
+        var informationMovie = new JMenuItem("Information sur les films");
+        var rentMovieMenu = new JMenuItem("Louer un film");
+        var createMember = new JMenuItem("Créer un membre");
+        var modifyMovieMenu = new JMenuItem("Modifier un film");
+        var adminMenu = new JMenuItem("Administration");
+        var addMovieMenu = new JMenuItem("Ajouter un film");
+        menubar.add(menu);
+        menu.add(homePage);
+        menu.add(informationMovie);
+        menu.add(rentMovieMenu);
+        menu.add(createMember);
+        menu.add(adminMenu);
+        menu.add(addMovieMenu);
+        menu.add(modifyMovieMenu);
+        //
+        setJMenuBar(menubar);
+
+        addMovieMenu.addActionListener(new MenuAction(addMovie.getPanelWindow()));
+        rentMovieMenu.addActionListener(new MenuAction(rentMovie.getPanelWindow()));
+        modifyMovieMenu.addActionListener(new MenuAction(searchModifyMovie.getPanelWindow()));
+       // var session = HibernateUtils.getSessionFactory();
+        //var test = new SearchModifyMovie(new MovieService(session), session);
+
+        //menu.addActionListener(new MenuAction(test.getAll()));
+      //  menuItem1.addActionListener(new MenuAction(test.getAll()));
+      //  informationMovie.addActionListener(new MenuAction(test.getAll()));
+    }
+
+    private void changePanel(JPanel panel) {
+        getContentPane().removeAll();
+        getContentPane().add(panel, BorderLayout.CENTER);
+        getContentPane().doLayout();
+        update(getGraphics());
+        repaint();
     }
 }
