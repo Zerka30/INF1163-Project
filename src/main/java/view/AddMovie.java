@@ -1,17 +1,16 @@
 package view;
 
-import controller.HibernateUtils;
 import entity.Category;
 import entity.CopyMovie;
 import entity.Movie;
 import model.MovieService;
 import model.Service;
+import org.hibernate.SessionFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
@@ -19,21 +18,18 @@ import java.util.Objects;
 public class AddMovie {
     private JPanel formAddMovie;
     private JTextField titleField;
-    private JLabel title;
-    private JLabel categories;
-    private JTable supportTable;
+
     private JCheckBox news;
     private JButton buttonAddMovie;
     private JPanel categoriesList;
     private JPanel categoriesList2;
     private JPanel support;
     private JPanel supportInformation;
-
-    private MovieService movieService;
+    private final MovieService movieService;
     private Service service;
-    public AddMovie(MovieService movieService, Service service) {
-        this.movieService = Objects.requireNonNull(movieService);
-        this.service = Objects.requireNonNull(service);
+    public AddMovie(SessionFactory sessionFactory) {
+        this.movieService = Objects.requireNonNull(new MovieService(sessionFactory));
+        this.service = Objects.requireNonNull(new Service(sessionFactory));
         var categories = movieService.getCategories();
 
         var grid = new GridLayout(categories.size(), 1);
@@ -97,13 +93,15 @@ public class AddMovie {
                 var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Integer.parseInt(blueRayPrice.getText()), blueRayLabel.getText(), movie);
                 var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Integer.parseInt(dvdPrice.getText()), dvdLabel.getText(), movie);
 
-                System.out.println(movie);
-
                 service.save(movie);
                 service.save(copyMovie);
                 service.save(copyMovie2);
             }
         });
+    }
+
+    private void drawCategories() {
+
     }
 
    public JPanel getPanelWindow() {

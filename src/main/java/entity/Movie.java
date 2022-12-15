@@ -13,7 +13,6 @@ public class Movie {
 
     private boolean news;
 
-    //   @ManyToMany(mappedBy = "movies")
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "category_movie",
@@ -41,6 +40,10 @@ public class Movie {
 
     public void setNews(boolean news) {
         this.news = news;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override

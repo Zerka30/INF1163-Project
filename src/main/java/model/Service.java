@@ -1,9 +1,6 @@
 package model;
 
-import entity.CopyMovie;
-import entity.Member;
-import entity.Movie;
-import entity.MyTable;
+import entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -97,6 +94,28 @@ public class Service {
         var copyMovie = (CopyMovie) session.createQuery("from CopyMovie where movie_id = '" + title + "' and support = '" + support + "'").getSingleResult();
         session.close();
         return copyMovie;
+    }
+
+    public List<RentMovie> getRentMovieLate() {
+        var session = sessionFactory.openSession();
+        List<RentMovie> rentMovies;
+        rentMovies = session.createQuery("from RentMovie where rentbackuser is null and rentbackdate < now()").list();
+        session.close();
+        return rentMovies;
+    }
+
+    public String getMovieFromCopyMovie(int id) {
+        var session = sessionFactory.openSession();
+        var title = (String) session.createNativeQuery("select movie_id from CopyMovie c where c.id =" + id).uniqueResult();
+        session.close();
+        return title;
+    }
+
+    public List<String> getCategoriesFromMovie(Movie movie) {
+        var session = sessionFactory.openSession();
+        var title = (List<String>) session.createNativeQuery("select name from category_movie where title ='" + movie.getTitle() + "'").list();
+        session.close();
+        return title;
     }
 }
 

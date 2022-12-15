@@ -11,27 +11,32 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Home extends JFrame {
-
     private final SessionFactory sessionFactory;
     private AddMovie addMovie;
     private RentMovie rentMovie;
     private SearchModifyMovie searchModifyMovie;
+    private FirstPage firstPage;
+    private InformationMovie informationMovie;
 
     public Home(String title, int width, int height, SessionFactory sessionFactory) {
         Objects.requireNonNull(title);
         if (width < 0 || height < 0)
             throw new IllegalArgumentException();
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
+        // Init
+        firstPage = new FirstPage(sessionFactory);
+        changePanel(firstPage.getWindow());
 
         initPages();
         initMenu();
         specificationOfFrame(title, width, height);
     }
 
-    private void initPages() {
-        addMovie = new AddMovie(new MovieService(sessionFactory), new Service(sessionFactory));
+   private void initPages() {
+        addMovie = new AddMovie(sessionFactory);
         rentMovie = new RentMovie(new Service(sessionFactory));
         searchModifyMovie = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
+        informationMovie = new InformationMovie(sessionFactory);
     }
     private void specificationOfFrame(String title, int width, int height) {
         setTitle(title);
@@ -61,16 +66,16 @@ public class Home extends JFrame {
     private void initMenu() {
         var menubar = new JMenuBar();
         var menu = new JMenu("Menu");
-        var homePage = new JMenuItem("Accueil");
-        var informationMovie = new JMenuItem("Information sur les films");
+        var firstMenu = new JMenuItem("Accueil");
+        var informationMovieMenu = new JMenuItem("Information sur les films");
         var rentMovieMenu = new JMenuItem("Louer un film");
         var createMember = new JMenuItem("Créer un membre");
         var modifyMovieMenu = new JMenuItem("Modifier un film");
         var adminMenu = new JMenuItem("Administration");
         var addMovieMenu = new JMenuItem("Ajouter un film");
         menubar.add(menu);
-        menu.add(homePage);
-        menu.add(informationMovie);
+        menu.add(firstMenu);
+        menu.add(informationMovieMenu);
         menu.add(rentMovieMenu);
         menu.add(createMember);
         menu.add(adminMenu);
@@ -79,15 +84,29 @@ public class Home extends JFrame {
         //
         setJMenuBar(menubar);
 
-        addMovieMenu.addActionListener(new MenuAction(addMovie.getPanelWindow()));
+        firstMenu.addActionListener(actionEvent -> {
+            firstPage = new FirstPage(sessionFactory);
+            changePanel(firstPage.getWindow());
+        });
+
+        informationMovieMenu.addActionListener(actionEvent -> {
+            informationMovie = new InformationMovie(sessionFactory);
+            changePanel(informationMovie.getWindow());
+        });
+
+        addMovieMenu.addActionListener(actionEvent -> {
+            addMovie = new AddMovie(sessionFactory);
+            changePanel(addMovie.getPanelWindow());
+        });
+
+
         rentMovieMenu.addActionListener(new MenuAction(rentMovie.getPanelWindow()));
         modifyMovieMenu.addActionListener(new MenuAction(searchModifyMovie.getPanelWindow()));
-       // var session = HibernateUtils.getSessionFactory();
-        //var test = new SearchModifyMovie(new MovieService(session), session);
 
-        //menu.addActionListener(new MenuAction(test.getAll()));
-      //  menuItem1.addActionListener(new MenuAction(test.getAll()));
-      //  informationMovie.addActionListener(new MenuAction(test.getAll()));
+        modifyMovieMenu.addActionListener(actionEvent -> {
+            searchModifyMovie = new SearchModifyMovie(new MovieService(sessionFactory), sessionFactory);
+            changePanel(searchModifyMovie.getPanelWindow());
+        });
     }
 
     private void changePanel(JPanel panel) {
@@ -95,6 +114,5 @@ public class Home extends JFrame {
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().doLayout();
         update(getGraphics());
-        repaint();
     }
 }

@@ -1,7 +1,5 @@
 package entity;
 
-import model.MovieService;
-
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -16,7 +14,7 @@ public class CopyMovie {
     private int quantity;
     // price of the movie
     private int price;
-    // support of the film (blueray | dvd)
+    // support of the film (blueray || dvd)
     private String support;
 
     @OneToMany(
@@ -56,5 +54,9 @@ public class CopyMovie {
 
     public int getId() {
         return id;
+    }
+
+    public Movie getMovie() {
+        return movie;
     }
 }
