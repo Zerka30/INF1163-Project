@@ -100,6 +100,10 @@ public class Home extends JFrame {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
             changePanel(searchModifyMovie.getPanelWindow(), "Videotron - Modifier un film");
         });
+        createMember.addActionListener(actionEvent -> {
+            var createMemberFrame = new CreateMember(sessionFactory);
+            changePanel(createMemberFrame.getPanelWindow(), "Videotron - Créer un membre");
+        });
 
         disconnectMenu.addActionListener(actionEvent -> {
             admin = false;
