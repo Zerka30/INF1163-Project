@@ -91,7 +91,14 @@
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
+        <children>
+          <scrollpane id="a61f6">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </scrollpane>
+        </children>
       </grid>
       <component id="b4db2" class="javax.swing.JTextField" binding="movieId">
         <constraints>

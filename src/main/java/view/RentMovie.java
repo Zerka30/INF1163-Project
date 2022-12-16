@@ -33,7 +33,6 @@ public class RentMovie {
     public RentMovie(SessionFactory sessionFactory) {
         Objects.requireNonNull(sessionFactory);
         this.service = new Service(sessionFactory);
-
         drawWindow();
         addRentMovie();
     }
