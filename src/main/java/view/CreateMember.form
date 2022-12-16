@@ -43,7 +43,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="2628a" class="javax.swing.JLabel" binding="addressLabel">
+                  <component id="2628a" class="javax.swing.JLabel">
                     <constraints border-constraint="Center"/>
                     <properties>
                       <labelFor value="3278"/>

@@ -44,16 +44,13 @@ public class RentMovie {
     public CopyMovie getCopyMovie() {
         return copyMovie;
     }
-
-    public Member getMember() {
-        return member;
-    }
-
+    
     public Calendar getRentBackDate() {
         return rentBackDate;
     }
 
-    public Calendar getRentBackUser() {
-        return rentBackUser;
+
+    public void setrentbackdate() {
+        this.rentBackUser= Calendar.getInstance();
     }
 }

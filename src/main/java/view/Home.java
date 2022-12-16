@@ -16,6 +16,7 @@ public class Home extends JFrame {
     private FirstPage firstPage;
     private InformationMovie informationMovie;
 
+    private BackMovie backMovie;
     private boolean admin;
 
     public Home(String title, int width, int height, SessionFactory sessionFactory) {
@@ -27,17 +28,8 @@ public class Home extends JFrame {
         firstPage = new FirstPage(sessionFactory);
         changePanel(firstPage.getWindow());
 
-        initPanels();
         initMenu();
-        // initMenu2();
         specificationOfFrame(title, width, height);
-    }
-
-    private void initPanels() {
-        addMovie = new AddMovie(sessionFactory);
-        rentMovie = new RentMovie(sessionFactory);
-        searchModifyMovie = new SearchModifyMovie(sessionFactory);
-        informationMovie = new InformationMovie(sessionFactory);
     }
 
     private void specificationOfFrame(String title, int width, int height) {
@@ -51,20 +43,6 @@ public class Home extends JFrame {
         setLayout(new BorderLayout());
     }
 
-    private class MenuAction implements ActionListener {
-
-        private JPanel panel;
-
-        private MenuAction(JPanel panel) {
-            this.panel = panel;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            changePanel(panel);
-        }
-    }
-
     private void initMenu() {
         var menubar = new JMenuBar();
         var menu = new JMenu("Menu");
@@ -75,12 +53,13 @@ public class Home extends JFrame {
         var modifyMovieMenu = new JMenuItem("Modifier un film");
         var adminMenu = new JMenuItem("Administration");
         var addMovieMenu = new JMenuItem("Ajouter un film");
-        var backMovieMenu = new JMenuItem("Rentre  un film");
+        var backMovieMenu = new JMenuItem("Rendre  un film");
         var disconnectMenu = new JMenuItem("Déconnexion");
         menubar.add(menu);
         menu.add(firstMenu);
         menu.add(informationMovieMenu);
         menu.add(rentMovieMenu);
+        menu.add(backMovieMenu);
         menu.add(createMember);
 
         if (admin) {
@@ -121,6 +100,12 @@ public class Home extends JFrame {
             changePanel(firstPage.getWindow());
         });
 
+        backMovieMenu.addActionListener(actionEvent -> {
+            backMovie = new BackMovie(sessionFactory);
+            changePanel(backMovie.getWindow());
+        });
+
+
         adminMenu.addActionListener(actionEvent -> {
             var jop = new JOptionPane();
             while (true) {
@@ -135,22 +120,6 @@ public class Home extends JFrame {
                 }
             }
         });
-    }
-
-    private void initMenu2() {
-        var cards = new JTabbedPane();
-        cards.add("AJOUTER FIlm", addMovie.getPanelWindow());
-        cards.add("Modifier Film", searchModifyMovie.getPanelWindow());
-        cards.add("Informations films", informationMovie.getPanelWindow());
-
-        cards.addChangeListener(changeEvent -> {
-            System.out.println("passe ");
-            initPanels();
-            addMovie = new AddMovie(sessionFactory);
-        });
-
-        System.out.println("Test" + cards.getSelectedComponent());
-        getContentPane().add(cards);
     }
 
     private void changePanel(JPanel panel) {
