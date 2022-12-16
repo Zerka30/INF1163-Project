@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.ModifyAMovie">
+  <grid id="27dc6" binding="window" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="abfcf" class="javax.swing.JLabel">
+        <constraints border-constraint="North"/>
+        <properties>
+          <horizontalAlignment value="0"/>
+          <text value="Modifier un film"/>
+        </properties>
+      </component>
+      <grid id="6883c" binding="formMovie" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="3256c" binding="formMovieInclude" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+          <component id="c902a" class="javax.swing.JButton" binding="modifyMovie">
+            <constraints border-constraint="South"/>
+            <properties>
+              <text value="Modifier un film"/>
+            </properties>
+          </component>
+          <component id="b39f7" class="javax.swing.JCheckBox" binding="news">
+            <constraints border-constraint="Before"/>
+            <properties>
+              <text value="Nouveauté"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="c662" class="javax.swing.JLabel" binding="titleLabel">
+        <constraints border-constraint="West"/>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

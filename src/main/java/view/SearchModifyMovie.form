@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.SearchModifyMovie">
+  <grid id="27dc6" binding="all" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="c196" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="8f5c" class="javax.swing.JButton" binding="searchButton">
+            <constraints border-constraint="East"/>
+            <properties>
+              <text value="Filtrer"/>
+            </properties>
+          </component>
+          <component id="40f5a" class="javax.swing.JTextField" binding="titleOfMovie">
+            <constraints border-constraint="Center"/>
+            <properties/>
+          </component>
+        </children>
+      </grid>
+      <grid id="80c75" binding="result" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="3212e" binding="result2" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="North"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

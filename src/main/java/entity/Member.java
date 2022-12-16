@@ -5,7 +5,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Member {
+@Table(name = "member")
+public final class Member {
     @Id
     private String phoneNumber;
     private String address;
@@ -35,5 +36,13 @@ public class Member {
         this.address = Objects.requireNonNull(address);
         this.secretCode = Objects.requireNonNull(secretCode);
         this.creditCard = Objects.requireNonNull(creditCard);
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public int getSecretCode() {
+        return secretCode;
     }
 }

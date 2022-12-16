@@ -1,6 +1,0 @@
-view/CreateMember.class
-model/MemberService.class
-entity/Member.class
-App.class
-entity/Person.class
-model/PersonService.class
