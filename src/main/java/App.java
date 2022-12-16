@@ -1,3 +1,4 @@
+import view.CreateMember;
 import view.SearchMovieToModify;
 
 import javax.swing.*;
@@ -8,7 +9,8 @@ public class App {
         var sessionFactory = HibernateUtils.getSessionFactory();
         var searchMovie = new SearchMovieToModify(sessionFactory);
 
-        createFrame(searchMovie.getWindow());
+        var frame = new CreateMember(sessionFactory);
+        frame.runView(frame.getWindow());
      /*   var personService = new PersonService(sessionFactory);
         var person = new Person("VALADE 6", "Jeremy");
 
