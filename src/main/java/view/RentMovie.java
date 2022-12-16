@@ -78,7 +78,6 @@ public class RentMovie {
     private void addRentMovie() {
         buttonRentMovie.addActionListener(actionEvent -> {
             var copyMovie = service.getCopyMovie(Objects.requireNonNull(movieJComboBox.getSelectedItem()).toString(), Objects.requireNonNull(supportJComboBox.getSelectedItem()).toString());
-            System.out.println("CopyMOvie id " + copyMovie.getId());
             var today = Calendar.getInstance();
             var rentDate = Calendar.getInstance();
             if (Objects.requireNonNull(locationJComboBox.getSelectedItem()).toString().equals("Journée")) {
