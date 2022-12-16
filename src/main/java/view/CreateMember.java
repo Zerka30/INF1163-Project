@@ -12,23 +12,11 @@ import java.awt.event.ActionListener;
 public class CreateMember {
 
     private JPanel sheet;
-    private JPanel body;
-    private JTextField AdressInput;
-    private JTextField CardInput;
     private JButton createMember;
-    private JPanel address;
-    private JLabel addressLabel;
     private JTextField addressInput;
     private JTextField creditcardInput;
     private JTextField expirationInput;
     private JTextField secretInput;
-    private JLabel title;
-    private JPanel creditCard;
-    private JLabel cardNumberLabel;
-    private JLabel expirationLabel;
-    private JLabel secretLabel;
-    private JPanel phoneNumber;
-    private JLabel phoneNumberLabel;
     private JTextField phoneNumberInput;
 
     public CreateMember(SessionFactory sessionFactory) {
