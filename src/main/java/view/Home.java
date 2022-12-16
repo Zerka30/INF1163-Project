@@ -25,7 +25,7 @@ public class Home extends JFrame {
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
         // Init
         firstPage = new FirstPage(sessionFactory);
-        changePanel(firstPage.getWindow());
+        changePanel(firstPage.getWindow(), "Videotron - Accueil");
 
         initPanels();
         initMenu();
@@ -61,7 +61,7 @@ public class Home extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            changePanel(panel);
+            changePanel(panel, "DEBUG");
         }
     }
 
@@ -96,29 +96,29 @@ public class Home extends JFrame {
 
         firstMenu.addActionListener(actionEvent -> {
             firstPage = new FirstPage(sessionFactory);
-            changePanel(firstPage.getWindow());
+            changePanel(firstPage.getWindow(), "VideoTron - Accueil");
         });
         informationMovieMenu.addActionListener(actionEvent -> {
             informationMovie = new InformationMovie(sessionFactory);
-            changePanel(informationMovie.getPanelWindow());
+            changePanel(informationMovie.getPanelWindow(), "Videotron - Information sur les films");
         });
         addMovieMenu.addActionListener(actionEvent -> {
             addMovie = new AddMovie(sessionFactory);
-            changePanel(addMovie.getPanelWindow());
+            changePanel(addMovie.getPanelWindow(), "Videotron - Ajouter un film");
         });
         rentMovieMenu.addActionListener(actionEvent -> {
             rentMovie = new RentMovie(sessionFactory);
-            changePanel(rentMovie.getPanelWindow());
+            changePanel(rentMovie.getPanelWindow(), "Videotron - Louer un film");
         });
         modifyMovieMenu.addActionListener(actionEvent -> {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
-            changePanel(searchModifyMovie.getPanelWindow());
+            changePanel(searchModifyMovie.getPanelWindow(), "Videotron - Modifier un film");
         });
 
         disconnectMenu.addActionListener(actionEvent -> {
             admin = false;
             initMenu();
-            changePanel(firstPage.getWindow());
+            changePanel(firstPage.getWindow(), "Videotron - Accueil");
         });
 
         adminMenu.addActionListener(actionEvent -> {
@@ -153,7 +153,8 @@ public class Home extends JFrame {
         getContentPane().add(cards);
     }
 
-    private void changePanel(JPanel panel) {
+    private void changePanel(JPanel panel, String title) {
+        setTitle(title);
         getContentPane().removeAll();
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().doLayout();
