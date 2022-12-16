@@ -1,4 +1,5 @@
 import controller.HibernateUtils;
+import view.Home;
 
 public class App {
     public static void main(String[] args) {
