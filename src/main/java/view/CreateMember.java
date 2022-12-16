@@ -44,13 +44,16 @@ public class CreateMember {
                     var service = new Service(sessionFactory);
                     service.save(member);
 
+                    // Create a pop up to display member secret passsword, translate in french
+                    JOptionPane.showMessageDialog(null, "Le membre à bien été créé ! \n" + "Voici le mot de passe du membre : " + member.getSecretCode());
+
                 }
 
             }
         });
     }
 
-    public JPanel getWindow() {
+    public JPanel getPanelWindow() {
         return sheet;
     }
 
