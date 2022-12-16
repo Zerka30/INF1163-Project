@@ -1,4 +1,3 @@
-
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->

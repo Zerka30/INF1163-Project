@@ -10,9 +10,10 @@ public final class Member {
     @Id
     private String phoneNumber;
     private String address;
-    private int secretCode;
-
     private String creditCard;
+    private String expireDate;
+    private String secretCode;
+
 
     @OneToMany(
             mappedBy = "copyMovie",
@@ -31,11 +32,21 @@ public final class Member {
 
     public Member() {}
 
-    public Member(String phoneNumber, String address, int secretCode, String creditCard) {
+    public Member(String phoneNumber, String address, String creditCard, String expireDate, String secretCode) {
         this.phoneNumber = Objects.requireNonNull(phoneNumber);
         this.address = Objects.requireNonNull(address);
-        this.secretCode = Objects.requireNonNull(secretCode);
         this.creditCard = Objects.requireNonNull(creditCard);
+        this.expireDate = Objects.requireNonNull(expireDate);
+        this.secretCode = Objects.requireNonNull(secretCode);
+    }
+
+    @Override
+    public String toString() {
+        return "Numéro de téléphone : " + this.phoneNumber + "\n" +
+                "Adresse : " + this.address + "\n" +
+                "Carte de crédit : " + this.creditCard + "\n" +
+                "Date d'expiration : " + this.expireDate + "\n" +
+                "Code secret : " + this.secretCode + "\n";
     }
 
     public String getPhoneNumber() {
