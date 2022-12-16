@@ -45,7 +45,7 @@ public class InformationMovie {
         result.revalidate();
     }
 
-    public JPanel getWindow() {
+    public JPanel getPanelWindow() {
         return window;
     }
 }

@@ -16,6 +16,8 @@ public class Home extends JFrame {
     private FirstPage firstPage;
     private InformationMovie informationMovie;
 
+    private boolean admin;
+
     public Home(String title, int width, int height, SessionFactory sessionFactory) {
         Objects.requireNonNull(title);
         if (width < 0 || height < 0)
@@ -25,17 +27,19 @@ public class Home extends JFrame {
         firstPage = new FirstPage(sessionFactory);
         changePanel(firstPage.getWindow());
 
-        initPages();
+        initPanels();
         initMenu();
+        // initMenu2();
         specificationOfFrame(title, width, height);
     }
 
-   private void initPages() {
+    private void initPanels() {
         addMovie = new AddMovie(sessionFactory);
         rentMovie = new RentMovie(sessionFactory);
         searchModifyMovie = new SearchModifyMovie(sessionFactory);
         informationMovie = new InformationMovie(sessionFactory);
     }
+
     private void specificationOfFrame(String title, int width, int height) {
         setTitle(title);
         setPreferredSize(new Dimension(width, height));
@@ -71,39 +75,82 @@ public class Home extends JFrame {
         var modifyMovieMenu = new JMenuItem("Modifier un film");
         var adminMenu = new JMenuItem("Administration");
         var addMovieMenu = new JMenuItem("Ajouter un film");
+        var backMovieMenu = new JMenuItem("Rentre  un film");
+        var disconnectMenu = new JMenuItem("Déconnexion");
         menubar.add(menu);
         menu.add(firstMenu);
         menu.add(informationMovieMenu);
         menu.add(rentMovieMenu);
         menu.add(createMember);
-        menu.add(adminMenu);
-        menu.add(addMovieMenu);
-        menu.add(modifyMovieMenu);
+
+        if (admin) {
+            menu.add(addMovieMenu);
+            menu.add(modifyMovieMenu);
+            menu.add(disconnectMenu);
+        } else {
+            menu.add(adminMenu);
+        }
         //
         setJMenuBar(menubar);
+
 
         firstMenu.addActionListener(actionEvent -> {
             firstPage = new FirstPage(sessionFactory);
             changePanel(firstPage.getWindow());
         });
-
         informationMovieMenu.addActionListener(actionEvent -> {
             informationMovie = new InformationMovie(sessionFactory);
-            changePanel(informationMovie.getWindow());
+            changePanel(informationMovie.getPanelWindow());
         });
-
         addMovieMenu.addActionListener(actionEvent -> {
             addMovie = new AddMovie(sessionFactory);
             changePanel(addMovie.getPanelWindow());
         });
-
-        rentMovieMenu.addActionListener(new MenuAction(rentMovie.getPanelWindow()));
-        modifyMovieMenu.addActionListener(new MenuAction(searchModifyMovie.getPanelWindow()));
-
+        rentMovieMenu.addActionListener(actionEvent -> {
+            rentMovie = new RentMovie(sessionFactory);
+            changePanel(rentMovie.getPanelWindow());
+        });
         modifyMovieMenu.addActionListener(actionEvent -> {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
             changePanel(searchModifyMovie.getPanelWindow());
         });
+
+        disconnectMenu.addActionListener(actionEvent -> {
+            admin = false;
+            initMenu();
+            changePanel(firstPage.getWindow());
+        });
+
+        adminMenu.addActionListener(actionEvent -> {
+            var jop = new JOptionPane();
+            while (true) {
+                String password = jop.showInputDialog(null, "Mot de passe", "Administration", JOptionPane.QUESTION_MESSAGE);
+                if (password.equals("1234")) {
+                    admin = true;
+                    initMenu();
+                    revalidate();
+                    break;
+                } else {
+                    jop.showMessageDialog(null, "Mauvais mot de passe", "Authentification échoué", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+    }
+
+    private void initMenu2() {
+        var cards = new JTabbedPane();
+        cards.add("AJOUTER FIlm", addMovie.getPanelWindow());
+        cards.add("Modifier Film", searchModifyMovie.getPanelWindow());
+        cards.add("Informations films", informationMovie.getPanelWindow());
+
+        cards.addChangeListener(changeEvent -> {
+            System.out.println("passe ");
+            initPanels();
+            addMovie = new AddMovie(sessionFactory);
+        });
+
+        System.out.println("Test" + cards.getSelectedComponent());
+        getContentPane().add(cards);
     }
 
     private void changePanel(JPanel panel) {
@@ -111,5 +158,6 @@ public class Home extends JFrame {
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().doLayout();
         update(getGraphics());
+        revalidate();
     }
 }

@@ -47,7 +47,6 @@ public class AddMovie {
         drawSupport();
         addMovie();
         formAddMovie.revalidate();
-
     }
 
     private void drawCategories() {
@@ -122,5 +121,8 @@ public class AddMovie {
 
     public JPanel getPanelWindow() {
         return formAddMovie;
+    }
+    public void removeAll() {
+        formAddMovie.removeAll();
     }
 }

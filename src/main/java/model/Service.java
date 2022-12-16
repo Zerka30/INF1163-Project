@@ -31,12 +31,6 @@ public class Service {
         session.close();
     }
 
-    public void add(MyTable entity) {
-        openSession();
-        session.save(entity);
-        closeSession();
-    }
-
     public void update(Object entity) {
         openSession();
         session.update(entity);
