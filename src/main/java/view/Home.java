@@ -51,20 +51,6 @@ public class Home extends JFrame {
         setLayout(new BorderLayout());
     }
 
-    private class MenuAction implements ActionListener {
-
-        private JPanel panel;
-
-        private MenuAction(JPanel panel) {
-            this.panel = panel;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            changePanel(panel, "DEBUG");
-        }
-    }
-
     private void initMenu() {
         var menubar = new JMenuBar();
         var menu = new JMenu("Menu");
