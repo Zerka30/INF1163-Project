@@ -18,7 +18,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="fa89c" binding="body" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="fa89c" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
@@ -34,7 +34,7 @@
                   <text value="Crée un nouveau membre"/>
                 </properties>
               </component>
-              <grid id="4254d" binding="address" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="4254d" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
                     <minimum-size width="250" height="-1"/>
@@ -56,7 +56,7 @@
                   </component>
                 </children>
               </grid>
-              <grid id="b8e63" binding="creditCard" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="b8e63" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
@@ -84,7 +84,7 @@
                       <text value="année/mois"/>
                     </properties>
                   </component>
-                  <component id="9c77f" class="javax.swing.JLabel" binding="cardNumberLabel">
+                  <component id="9c77f" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -93,7 +93,7 @@
                       <text value="Numéro de carte"/>
                     </properties>
                   </component>
-                  <component id="d5b93" class="javax.swing.JLabel" binding="expirationLabel">
+                  <component id="d5b93" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -102,7 +102,7 @@
                       <text value="Expiration"/>
                     </properties>
                   </component>
-                  <component id="9e9b7" class="javax.swing.JLabel" binding="secretLabel">
+                  <component id="9e9b7" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -121,7 +121,7 @@
                   </component>
                 </children>
               </grid>
-              <component id="d0ab" class="javax.swing.JLabel" binding="title">
+              <component id="d0ab" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -135,7 +135,7 @@
                 </constraints>
                 <properties/>
               </component>
-              <grid id="4721d" binding="phoneNumber" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="4721d" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="0" indent="0" use-parent-layout="false">
                     <minimum-size width="250" height="10"/>
@@ -144,7 +144,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1d797" class="javax.swing.JLabel" binding="phoneNumberLabel">
+                  <component id="1d797" class="javax.swing.JLabel">
                     <constraints border-constraint="Center"/>
                     <properties>
                       <horizontalTextPosition value="11"/>
