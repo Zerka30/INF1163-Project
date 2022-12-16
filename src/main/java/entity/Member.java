@@ -15,6 +15,7 @@ public final class Member {
     private String secretCode;
 
 
+
     @OneToMany(
             mappedBy = "copyMovie",
             cascade = CascadeType.ALL,
@@ -53,7 +54,7 @@ public final class Member {
         return phoneNumber;
     }
 
-    public int getSecretCode() {
+    public String getSecretCode() {
         return secretCode;
     }
 }
