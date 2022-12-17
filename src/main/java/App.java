@@ -1,4 +1,4 @@
-import controller.HibernateUtils;
+import tool.HibernateUtils;
 import view.Home;
 
 public class App {
