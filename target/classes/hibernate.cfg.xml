@@ -1,18 +1,17 @@
-
 <hibernate-configuration>
     <session-factory>
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/test</property>
-        <property name="connection.username">jeremy</property>
-        <property name="connection.password">jeremy</property>
+        <property name="connection.url">jdbc:postgresql://195.15.243.161:5432/inf1164_db</property>
+        <property name="connection.username">inf1164</property>
+        <property name="connection.password">qp3NbwgVAffiB5h4</property>
         <!-- SQL dialect -->
         <property name="hibernate.dialect">
             org.hibernate.dialect.PostgreSQL10Dialect</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">false</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
         <!-- Lors de l'utilisation des annotations @ManyToOne et OneToMany, l'ordre a son
         importance -->
         <mapping class="entity.Member" />

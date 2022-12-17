@@ -32,7 +32,7 @@ public class Home extends JFrame {
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
         password = initPasswordAdmin();
         firstPage = new FirstPage(sessionFactory);
-        changePanel(firstPage.getWindow(), "Videotron - Accueil");
+        changePanel(firstPage.getPanelWindow(), "Videotron - Accueil");
 
         initPanels();
         initMenu();
@@ -90,7 +90,7 @@ public class Home extends JFrame {
 
         firstMenu.addActionListener(actionEvent -> {
             firstPage = new FirstPage(sessionFactory);
-            changePanel(firstPage.getWindow(), "VideoTron - Accueil");
+            changePanel(firstPage.getPanelWindow(), "VideoTron - Accueil");
         });
         informationMovieMenu.addActionListener(actionEvent -> {
             informationMovie = new InformationMovie(sessionFactory);
@@ -108,25 +108,21 @@ public class Home extends JFrame {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
             changePanel(searchModifyMovie.getPanelWindow(), "Videotron - Modifier un film");
         });
-        createMember.addActionListener(actionEvent -> {
-            var createMemberFrame = new CreateMember(sessionFactory);
-            changePanel(createMemberFrame.getPanelWindow(), "Videotron - Créer un membre");
-        });
 
         createMemberMenu.addActionListener(actionEvent -> {
             createMember = new CreateMember(sessionFactory);
-            changePanel(createMember.getPanelWindow());
+            changePanel(createMember.getPanelWindow(), "Videotron - Créer un membre");
         });
 
         disconnectMenu.addActionListener(actionEvent -> {
             admin = false;
             initMenu();
-            changePanel(firstPage.getWindow(), "Videotron - Accueil");
+            changePanel(firstPage.getPanelWindow(), "Videotron - Accueil");
         });
 
         backMovieMenu.addActionListener(actionEvent -> {
             backMovie = new BackMovie(sessionFactory);
-            changePanel(backMovie.getWindow());
+            changePanel(backMovie.getWindow(), "Videotron - Rendre un film");
         });
 
 
