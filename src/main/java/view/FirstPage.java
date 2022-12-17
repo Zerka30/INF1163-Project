@@ -55,7 +55,7 @@ public class FirstPage {
         rentPanel.revalidate();
     }
 
-    public JPanel getWindow() {
+    public JPanel getPanelWindow() {
         return window;
     }
 }

@@ -6,7 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Home extends JFrame {
     private final SessionFactory sessionFactory;
@@ -18,19 +22,29 @@ public class Home extends JFrame {
 
     private BackMovie backMovie;
     private boolean admin;
+    private final String password;
 
     public Home(String title, int width, int height, SessionFactory sessionFactory) {
         Objects.requireNonNull(title);
         if (width < 0 || height < 0)
             throw new IllegalArgumentException();
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
-        // Init
+        password = initPasswordAdmin();
         firstPage = new FirstPage(sessionFactory);
-        changePanel(firstPage.getWindow());
-
+        changePanel(firstPage.getPanelWindow());
+        initPanels();
         initMenu();
         specificationOfFrame(title, width, height);
+
     }
+
+    private void initPanels() {
+        addMovie = new AddMovie(sessionFactory);
+        rentMovie = new RentMovie(sessionFactory);
+        searchModifyMovie = new SearchModifyMovie(sessionFactory);
+        informationMovie = new InformationMovie(sessionFactory);
+    }
+
 
     private void specificationOfFrame(String title, int width, int height) {
         setTitle(title);
@@ -69,13 +83,12 @@ public class Home extends JFrame {
         } else {
             menu.add(adminMenu);
         }
-        //
         setJMenuBar(menubar);
 
 
         firstMenu.addActionListener(actionEvent -> {
             firstPage = new FirstPage(sessionFactory);
-            changePanel(firstPage.getWindow());
+            changePanel(firstPage.getPanelWindow());
         });
         informationMovieMenu.addActionListener(actionEvent -> {
             informationMovie = new InformationMovie(sessionFactory);
@@ -97,7 +110,7 @@ public class Home extends JFrame {
         disconnectMenu.addActionListener(actionEvent -> {
             admin = false;
             initMenu();
-            changePanel(firstPage.getWindow());
+            changePanel(firstPage.getPanelWindow());
         });
 
         backMovieMenu.addActionListener(actionEvent -> {
@@ -109,8 +122,8 @@ public class Home extends JFrame {
         adminMenu.addActionListener(actionEvent -> {
             var jop = new JOptionPane();
             while (true) {
-                String password = jop.showInputDialog(null, "Mot de passe", "Administration", JOptionPane.QUESTION_MESSAGE);
-                if (password.equals("1234")) {
+                String passwordEnter = jop.showInputDialog(null, "Mot de passe", "Administration", JOptionPane.QUESTION_MESSAGE);
+                if (passwordEnter.equals(password)) {
                     admin = true;
                     initMenu();
                     revalidate();
@@ -129,4 +142,19 @@ public class Home extends JFrame {
         update(getGraphics());
         revalidate();
     }
+    private String initPasswordAdmin() {
+        var properties = new Properties();
+        try {
+            var input = new FileInputStream(Objects.requireNonNull(getClass().getClassLoader().getResource("program.cfg")).getFile());
+            properties.load(input);
+        } catch (FileNotFoundException e) {
+            System.out.println("passe");
+            return "1234";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return properties.getProperty("password");
+    }
+
 }
