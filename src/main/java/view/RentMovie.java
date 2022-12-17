@@ -88,6 +88,10 @@ public class RentMovie {
             var rentMovieKey = new RentMovieKey(member.getPhoneNumber(), copyMovie.getId(), rentDate);
             var rentMovie = new entity.RentMovie(rentMovieKey, copyMovie, member, today, null, Float.parseFloat(priceTextField.getText()));
             service.save(rentMovie);
+
+            // Send a message to the member to confirm the rent
+            JOptionPane.showMessageDialog(null, "Le film a été loué avec succès");
+
         });
     }
 
