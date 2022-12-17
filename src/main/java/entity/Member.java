@@ -13,6 +13,7 @@ public final class Member {
     private String creditCard;
     private String expireDate;
     private String secretCode;
+    private int secretPassword;
 
 
 
@@ -39,6 +40,8 @@ public final class Member {
         this.creditCard = Objects.requireNonNull(creditCard);
         this.expireDate = Objects.requireNonNull(expireDate);
         this.secretCode = Objects.requireNonNull(secretCode);
+        // Generate a random secret password of 6 digits
+        this.secretPassword = Objects.requireNonNull((int) (Math.random() * 900000) + 100000);
     }
 
     @Override
@@ -47,14 +50,15 @@ public final class Member {
                 "Adresse : " + this.address + "\n" +
                 "Carte de crédit : " + this.creditCard + "\n" +
                 "Date d'expiration : " + this.expireDate + "\n" +
-                "Code secret : " + this.secretCode + "\n";
+                "Code secret : " + this.secretCode + "\n" +
+                "Mot de passe secret : " + this.secretPassword + "\n";
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getSecretCode() {
-        return secretCode;
+    public int getSecretCode() {
+        return secretPassword;
     }
 }

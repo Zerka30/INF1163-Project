@@ -110,7 +110,7 @@ public class Home extends JFrame {
 
         createMemberMenu.addActionListener(actionEvent -> {
             createMember = new CreateMember(sessionFactory);
-            changePanel(createMember.getWindow());
+            changePanel(createMember.getPanelWindow());
         });
 
         disconnectMenu.addActionListener(actionEvent -> {

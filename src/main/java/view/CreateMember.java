@@ -1,13 +1,10 @@
 package view;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import entity.Member;
 import model.Service;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,26 +44,16 @@ public class CreateMember {
                     var service = new Service(sessionFactory);
                     service.save(member);
 
+                    // Create a pop up to display member secret passsword, translate in french
+                    JOptionPane.showMessageDialog(null, "Le membre à bien été créé ! \n" + "Voici le mot de passe du membre : " + member.getSecretCode());
+
                 }
 
             }
         });
     }
 
-    public JPanel getWindow() {
+    public JPanel getPanelWindow() {
         return sheet;
     }
-
-    public void runView(Component e) {
-        var new_member = new JFrame("VideoTron - New Member");
-        System.out.println(e);
-        new_member.getContentPane().add(e);
-        new_member.setPreferredSize(new Dimension(750, 500));
-        new_member.setLocationRelativeTo(null);
-        new_member.pack();
-        new_member.setLocationRelativeTo(null);
-        new_member.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        new_member.setVisible(true);
-    }
-
 }
