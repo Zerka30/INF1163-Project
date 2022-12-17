@@ -92,6 +92,15 @@ public class RentMovie {
             // Send a message to the member to confirm the rent
             JOptionPane.showMessageDialog(null, "Le film a été loué avec succès");
 
+            // Clear the fields
+            memberId.setText("");
+            movieId.setText("");
+            memberLabel.setText("");
+            getMovie.removeAll();
+            supportPanel.removeAll();
+            panelRent.removeAll();
+            priceTextField.setText("");
+
         });
     }
 
