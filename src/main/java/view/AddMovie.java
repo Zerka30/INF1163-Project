@@ -1,5 +1,7 @@
 package view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import entity.Category;
 import entity.CopyMovie;
 import entity.Movie;
@@ -122,7 +124,9 @@ public class AddMovie {
     public JPanel getPanelWindow() {
         return formAddMovie;
     }
+
     public void removeAll() {
         formAddMovie.removeAll();
     }
+
 }

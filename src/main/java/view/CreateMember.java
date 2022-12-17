@@ -1,10 +1,13 @@
 package view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import entity.Member;
 import model.Service;
 import org.hibernate.SessionFactory;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -65,4 +68,5 @@ public class CreateMember {
         new_member.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         new_member.setVisible(true);
     }
+
 }

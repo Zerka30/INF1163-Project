@@ -24,6 +24,7 @@ public class SearchModifyMovie {
         printMovie(null);
         searchButton.addActionListener(actionEvent -> printMovie(titleOfMovie.getText()));
     }
+
     private void printMovie(String title) {
         var movies = movieService.getMovies(title);
         result.removeAll();
@@ -52,4 +53,5 @@ public class SearchModifyMovie {
     public JPanel getPanelWindow() {
         return all;
     }
+
 }

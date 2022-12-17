@@ -16,6 +16,7 @@ public class FirstPage {
     private final Service service;
 
     public FirstPage(SessionFactory sessionFactory) {
+
         this.service = new Service(sessionFactory);
         drawTableRent();
     }
@@ -40,7 +41,7 @@ public class FirstPage {
             var rentDateBackCalendar = rentMovieLate.getRentBackDate();
             var rentDate = formatDate.format(rentDateCalendar.getTime());
             var rentDateBack = formatDate.format(rentDateBackCalendar.getTime());
-            var numberDiffDay = (Calendar.getInstance().getTimeInMillis() - rentDateBackCalendar.getTimeInMillis()) / (24*60*60*1000);
+            var numberDiffDay = (Calendar.getInstance().getTimeInMillis() - rentDateBackCalendar.getTimeInMillis()) / (24 * 60 * 60 * 1000);
 
             rentPanelInclude.add(new JLabel(rentMovieLate.getRentMovieId().getMemberId()));
             rentPanelInclude.add(new JLabel(service.getMovieFromCopyMovie(id)));
@@ -58,4 +59,5 @@ public class FirstPage {
     public JPanel getPanelWindow() {
         return window;
     }
+
 }

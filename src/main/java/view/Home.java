@@ -20,6 +20,7 @@ public class Home extends JFrame {
     private FirstPage firstPage;
     private InformationMovie informationMovie;
 
+    private CreateMember createMember;
     private BackMovie backMovie;
     private boolean admin;
     private final String password;
@@ -63,7 +64,7 @@ public class Home extends JFrame {
         var firstMenu = new JMenuItem("Accueil");
         var informationMovieMenu = new JMenuItem("Information sur les films");
         var rentMovieMenu = new JMenuItem("Louer un film");
-        var createMember = new JMenuItem("Créer un membre");
+        var createMemberMenu = new JMenuItem("Créer un membre");
         var modifyMovieMenu = new JMenuItem("Modifier un film");
         var adminMenu = new JMenuItem("Administration");
         var addMovieMenu = new JMenuItem("Ajouter un film");
@@ -74,7 +75,7 @@ public class Home extends JFrame {
         menu.add(informationMovieMenu);
         menu.add(rentMovieMenu);
         menu.add(backMovieMenu);
-        menu.add(createMember);
+        menu.add(createMemberMenu);
 
         if (admin) {
             menu.add(addMovieMenu);
@@ -105,6 +106,11 @@ public class Home extends JFrame {
         modifyMovieMenu.addActionListener(actionEvent -> {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
             changePanel(searchModifyMovie.getPanelWindow());
+        });
+
+        createMemberMenu.addActionListener(actionEvent -> {
+            createMember = new CreateMember(sessionFactory);
+            changePanel(createMember.getWindow());
         });
 
         disconnectMenu.addActionListener(actionEvent -> {
