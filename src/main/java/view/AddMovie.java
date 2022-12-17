@@ -112,8 +112,8 @@ public class AddMovie {
                 }
             }
             var movie = new Movie(titleField.getText(), news.isSelected(), categories);
-            var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Integer.parseInt(blueRayPrice.getText()), blueRayLabel.getText(), movie);
-            var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Integer.parseInt(dvdPrice.getText()), dvdLabel.getText(), movie);
+            var copyMovie = new CopyMovie(Integer.parseInt(blueRayQuantity.getText()), Float.parseFloat(blueRayPrice.getText()), blueRayLabel.getText(), movie);
+            var copyMovie2 = new CopyMovie(Integer.parseInt(dvdQuantity.getText()), Float.parseFloat(dvdPrice.getText()), dvdLabel.getText(), movie);
 
             service.save(movie);
             service.save(copyMovie);

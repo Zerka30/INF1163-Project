@@ -13,7 +13,7 @@ public class CopyMovie {
     // numbers of copies
     private int quantity;
     // price of the movie
-    private int price;
+    private float price;
     // support of the film (blueray || dvd)
     private String support;
 
@@ -30,7 +30,7 @@ public class CopyMovie {
 
     public CopyMovie() {}
 
-    public CopyMovie(int quantity, int price, String support, Movie movie) {
+    public CopyMovie(int quantity, float price, String support, Movie movie) {
         if (quantity < 0 || price < 0)
             throw new IllegalArgumentException();
         this.quantity = quantity;
