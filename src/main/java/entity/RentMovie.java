@@ -24,11 +24,11 @@ public class RentMovie {
     @Basic
     @Temporal(TemporalType.DATE)
     private Calendar rentBackUser;
-    private int price;
+    private float price;
 
     public RentMovie() {    }
 
-    public RentMovie(RentMovieKey rentMovieId, CopyMovie copyMovie, Member member, Calendar rentBackDate, Calendar rentBackUser, int price) {
+    public RentMovie(RentMovieKey rentMovieId, CopyMovie copyMovie, Member member, Calendar rentBackDate, Calendar rentBackUser, float price) {
         this.rentMovieId = rentMovieId;
         this.copyMovie = copyMovie;
         this.member = member;

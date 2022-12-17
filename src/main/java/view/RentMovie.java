@@ -86,7 +86,7 @@ public class RentMovie {
                 rentDate.add(Calendar.DAY_OF_MONTH, 7);
             }
             var rentMovieKey = new RentMovieKey(member.getPhoneNumber(), copyMovie.getId(), rentDate);
-            var rentMovie = new entity.RentMovie(rentMovieKey, copyMovie, member, today, null, Integer.parseInt(priceTextField.getText()));
+            var rentMovie = new entity.RentMovie(rentMovieKey, copyMovie, member, today, null, Float.parseFloat(priceTextField.getText()));
             service.save(rentMovie);
         });
     }
