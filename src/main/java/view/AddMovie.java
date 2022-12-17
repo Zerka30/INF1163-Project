@@ -118,6 +118,9 @@ public class AddMovie {
             service.save(movie);
             service.save(copyMovie);
             service.save(copyMovie2);
+
+            // Send message to user that movie has been added
+            JOptionPane.showMessageDialog(null, "Le film a été ajouté avec succès");
         });
     }
 
