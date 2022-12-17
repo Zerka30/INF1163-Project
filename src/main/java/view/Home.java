@@ -32,7 +32,8 @@ public class Home extends JFrame {
         this.sessionFactory = Objects.requireNonNull(sessionFactory);
         password = initPasswordAdmin();
         firstPage = new FirstPage(sessionFactory);
-        changePanel(firstPage.getPanelWindow());
+        changePanel(firstPage.getWindow(), "Videotron - Accueil");
+
         initPanels();
         initMenu();
         specificationOfFrame(title, width, height);
@@ -89,23 +90,27 @@ public class Home extends JFrame {
 
         firstMenu.addActionListener(actionEvent -> {
             firstPage = new FirstPage(sessionFactory);
-            changePanel(firstPage.getPanelWindow());
+            changePanel(firstPage.getWindow(), "VideoTron - Accueil");
         });
         informationMovieMenu.addActionListener(actionEvent -> {
             informationMovie = new InformationMovie(sessionFactory);
-            changePanel(informationMovie.getPanelWindow());
+            changePanel(informationMovie.getPanelWindow(), "Videotron - Information sur les films");
         });
         addMovieMenu.addActionListener(actionEvent -> {
             addMovie = new AddMovie(sessionFactory);
-            changePanel(addMovie.getPanelWindow());
+            changePanel(addMovie.getPanelWindow(), "Videotron - Ajouter un film");
         });
         rentMovieMenu.addActionListener(actionEvent -> {
             rentMovie = new RentMovie(sessionFactory);
-            changePanel(rentMovie.getPanelWindow());
+            changePanel(rentMovie.getPanelWindow(), "Videotron - Louer un film");
         });
         modifyMovieMenu.addActionListener(actionEvent -> {
             searchModifyMovie = new SearchModifyMovie(sessionFactory);
-            changePanel(searchModifyMovie.getPanelWindow());
+            changePanel(searchModifyMovie.getPanelWindow(), "Videotron - Modifier un film");
+        });
+        createMember.addActionListener(actionEvent -> {
+            var createMemberFrame = new CreateMember(sessionFactory);
+            changePanel(createMemberFrame.getPanelWindow(), "Videotron - Créer un membre");
         });
 
         createMemberMenu.addActionListener(actionEvent -> {
@@ -116,7 +121,7 @@ public class Home extends JFrame {
         disconnectMenu.addActionListener(actionEvent -> {
             admin = false;
             initMenu();
-            changePanel(firstPage.getPanelWindow());
+            changePanel(firstPage.getWindow(), "Videotron - Accueil");
         });
 
         backMovieMenu.addActionListener(actionEvent -> {
@@ -141,7 +146,24 @@ public class Home extends JFrame {
         });
     }
 
-    private void changePanel(JPanel panel) {
+    private void initMenu2() {
+        var cards = new JTabbedPane();
+        cards.add("AJOUTER FIlm", addMovie.getPanelWindow());
+        cards.add("Modifier Film", searchModifyMovie.getPanelWindow());
+        cards.add("Informations films", informationMovie.getPanelWindow());
+
+        cards.addChangeListener(changeEvent -> {
+            System.out.println("passe ");
+            initPanels();
+            addMovie = new AddMovie(sessionFactory);
+        });
+
+        System.out.println("Test" + cards.getSelectedComponent());
+        getContentPane().add(cards);
+    }
+
+    private void changePanel(JPanel panel, String title) {
+        setTitle(title);
         getContentPane().removeAll();
         getContentPane().add(panel, BorderLayout.CENTER);
         getContentPane().doLayout();
