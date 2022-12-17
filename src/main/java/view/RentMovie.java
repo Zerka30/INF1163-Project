@@ -86,8 +86,21 @@ public class RentMovie {
                 rentDate.add(Calendar.DAY_OF_MONTH, 7);
             }
             var rentMovieKey = new RentMovieKey(member.getPhoneNumber(), copyMovie.getId(), rentDate);
-            var rentMovie = new entity.RentMovie(rentMovieKey, copyMovie, member, today, null, Integer.parseInt(priceTextField.getText()));
+            var rentMovie = new entity.RentMovie(rentMovieKey, copyMovie, member, today, null, Float.parseFloat(priceTextField.getText()));
             service.save(rentMovie);
+
+            // Send a message to the member to confirm the rent
+            JOptionPane.showMessageDialog(null, "Le film a été loué avec succès");
+
+            // Clear the fields
+            memberId.setText("");
+            movieId.setText("");
+            memberLabel.setText("");
+            getMovie.removeAll();
+            supportPanel.removeAll();
+            panelRent.removeAll();
+            priceTextField.setText("");
+
         });
     }
 
