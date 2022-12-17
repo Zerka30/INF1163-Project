@@ -121,6 +121,18 @@ public class AddMovie {
 
             // Send message to user that movie has been added
             JOptionPane.showMessageDialog(null, "Le film a été ajouté avec succès");
+
+            // Clear fields
+            titleField.setText("");
+            news.setSelected(false);
+            blueRayQuantity.setText("0");
+            blueRayPrice.setText("0");
+            dvdQuantity.setText("0");
+            dvdPrice.setText("0");
+            for (var checkbox : categoriesCheckBox) {
+                checkbox.setSelected(false);
+            }
+
         });
     }
 

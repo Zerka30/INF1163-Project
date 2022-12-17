@@ -11,7 +11,7 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">false</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
         <!-- Lors de l'utilisation des annotations @ManyToOne et OneToMany, l'ordre a son
         importance -->
         <mapping class="entity.Member" />
