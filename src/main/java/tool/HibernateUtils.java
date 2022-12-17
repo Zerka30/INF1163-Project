@@ -1,4 +1,4 @@
-package controller;
+package tool;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

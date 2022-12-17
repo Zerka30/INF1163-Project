@@ -9,8 +9,11 @@
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Informations](#informations)+
+- [Informations](#informations)
 - [Authors](#authors)
+- [Requirements](#Requirements)
+- [Installation](#Installation)
+- [Execution](#Execution)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -18,6 +21,12 @@ This project is a software for a manager of a video club renting movies and sell
 
 You can find the statement [here](https://utility.zerka.dev/student/UQO/INF1663.pdf)
 
+## Requirements
+- jdk17
+- maven
+
+## Execution
+- Execute the following command : java -jar INF1163-Project.jar
 
 ## ℹ Informations <a name = "informations"></a>
 

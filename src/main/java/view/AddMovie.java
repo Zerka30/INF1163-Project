@@ -1,5 +1,7 @@
 package view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import entity.Category;
 import entity.CopyMovie;
 import entity.Movie;
@@ -77,7 +79,7 @@ public class AddMovie {
         blueRayQuantity = new JTextField("0");
         blueRayPrice = new JTextField("0");
 
-        dvdLabel = new JLabel("Dvd");
+        dvdLabel = new JLabel("dvd");
         dvdQuantity = new JTextField("0");
         dvdPrice = new JTextField("0");
 
@@ -122,7 +124,9 @@ public class AddMovie {
     public JPanel getPanelWindow() {
         return formAddMovie;
     }
+
     public void removeAll() {
         formAddMovie.removeAll();
     }
+
 }

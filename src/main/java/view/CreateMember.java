@@ -56,16 +56,4 @@ public class CreateMember {
     public JPanel getPanelWindow() {
         return sheet;
     }
-
-    public void runView(Component e) {
-        var new_member = new JFrame("VideoTron - New Member");
-        System.out.println(e);
-        new_member.getContentPane().add(e);
-        new_member.setPreferredSize(new Dimension(750, 500));
-        new_member.setLocationRelativeTo(null);
-        new_member.pack();
-        new_member.setLocationRelativeTo(null);
-        new_member.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        new_member.setVisible(true);
-    }
 }

@@ -2,11 +2,11 @@ package model;
 
 import entity.Category;
 import entity.Movie;
+import entity.RentMovie;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class MovieService {
     private final SessionFactory sessionFactory;
@@ -39,13 +39,30 @@ public class MovieService {
         return categories;
     }
 
-    public void createMovie(String title, Boolean isNew, Set<Category> categories)
-    {
+    public RentMovie getrentMovies(String memberId, int copymovieId ) {
+        var session = sessionFactory.openSession();
+        RentMovie rentMovie;
+        rentMovie = (RentMovie) session.createQuery("from RentMovie where member_phonenumber ='" + memberId + "' and copymovie_id =" + copymovieId).uniqueResult();
+        session.close();
+        return rentMovie;
+    }
+
+
+    public void updaterentMovie(RentMovie delmovie) {
+        Objects.requireNonNull(delmovie);
         var session = sessionFactory.openSession();
         var transaction = session.beginTransaction();
-        Movie movie = new Movie(title,isNew, categories);
-        session.save(movie);
+        session.update(delmovie);
         transaction.commit();
         session.close();
     }
+
+    public int getIdOfCopyMovie(String title, String support){
+        var session = sessionFactory.openSession();
+        var copymovie = (int) session.createNativeQuery("select id from CopyMovie where movie_id='" + title + "' and support='"+support+"'").uniqueResult();
+        session.close();
+        return copymovie;
+    }
 }
+
+

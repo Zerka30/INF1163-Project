@@ -19,7 +19,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="99eab" binding="rentPanel2" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <grid id="99eab" binding="rentPanelInclude" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints border-constraint="Center"/>
             <properties/>
             <border type="none"/>

@@ -1,5 +1,7 @@
 package view;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import model.Service;
 import org.hibernate.SessionFactory;
 import javax.swing.*;
@@ -48,4 +50,5 @@ public class InformationMovie {
     public JPanel getPanelWindow() {
         return window;
     }
+
 }
