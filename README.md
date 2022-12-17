@@ -25,15 +25,8 @@ You can find the statement [here](https://utility.zerka.dev/student/UQO/INF1663.
 - jdk17
 - maven
 
-## Installation
-- Get to the root of the project
-- Execute the following command
-  - mvn clean 
-  - mvn package
-
 ## Execution
-- Get to the root of the project
-- Exécute the following command : java -jar INF1163-Project-1.0-SNAPSHOT-jar-with-dependencies.jar
+- Execute the following command : java -jar INF1163-Project.jar
 
 ## ℹ Informations <a name = "informations"></a>
 
